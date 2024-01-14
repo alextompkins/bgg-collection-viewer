@@ -10,3 +10,5 @@ This is built on Vite, simply run:
 ## Deployment
 
 Automated deployment though github branch watching using On Render.
+
+https://bgg-app.onrender.com
