@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 
 const Nav = () => {
   return (
-    <>
-      <h1 className="text-4xl">James BGG Stats</h1>
-      <ul className="pt-4">
+    <div className="flex flex-col md:flex-row gap-4">
+      <h1 className="text-4xl leading-[inherit]">James BGG Stats</h1>
+      <ul className=" flex">
         <li>
           <Link to="/" className="flex p-4 hover:bg-slate-800 rounded-xl">
             Home
@@ -16,7 +16,7 @@ const Nav = () => {
           </Link>
         </li>
       </ul>
-    </>
+    </div>
   );
 };
 
