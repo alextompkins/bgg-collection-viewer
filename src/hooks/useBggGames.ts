@@ -13,7 +13,7 @@ const useBggGames = () => {
       name: game.name._text,
       yearpublished: game.yearpublished._text,
       image: game.image._text,
-      thumbnail: game.thumbnail._text,
+      thumbnail: game.image._text,
       minplayers: parseInt(game.stats._attributes.minplayers),
       maxplayers: parseInt(game.stats._attributes.maxplayers),
       minplaytime: parseInt(game.stats._attributes.minplaytime),

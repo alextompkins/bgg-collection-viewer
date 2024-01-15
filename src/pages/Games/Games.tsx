@@ -22,7 +22,7 @@ const Games = () => {
             <img
               src={game.thumbnail}
               alt={game.name}
-              className="object-cover h-full w-full"
+              className="object-cover object-top h-full w-full"
             />
           </div>
 
