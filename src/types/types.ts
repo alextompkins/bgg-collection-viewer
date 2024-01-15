@@ -56,7 +56,7 @@ export type BggGame = {
   };
 };
 
-export type Game = {
+export type TGame = {
   bggId: string;
   name: string;
   yearpublished: string;
