@@ -5,8 +5,15 @@ export type BggGame = {
     subtype: string;
     collid: string;
   };
-  name: { _attributes: { sortindex: string }; _text: string };
-  yearpublished: { _text: string };
+  name: {
+    _attributes: {
+      sortindex: string;
+    };
+    _text: string;
+  };
+  yearpublished: {
+    _text: string;
+  };
   image: {
     _text: string;
   };
@@ -15,12 +22,12 @@ export type BggGame = {
   };
   stats: {
     _attributes: {
-      minplayers: "1";
-      maxplayers: "4";
-      minplaytime: "60";
-      maxplaytime: "90";
-      playingtime: "90";
-      numowned: "1790";
+      minplayers: string;
+      maxplayers: string;
+      minplaytime: string;
+      maxplaytime: string;
+      playingtime: string;
+      numowned: string;
     };
     rating: {
       _attributes: [object];
@@ -44,7 +51,9 @@ export type BggGame = {
       lastmodified: string;
     };
   };
-  numplays: { _text: string };
+  numplays: {
+    _text: string;
+  };
 };
 
 export type Game = {

@@ -15,18 +15,18 @@ const Games = () => {
     <div className="grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
       {collection?.map((game) => (
         <div
-          className="flex flex-col rounded-lg shadow border-gray-700 bg-gray-800 hover:bg-gray-700 my-4"
+          className="flex flex-col rounded-lg shadow border-gray-700 bg-gray-800 my-4"
           key={game.bggId}
         >
-          <div className="flex h-64">
+          <div className="w-full h-64 min-h-64 max-h-64">
             <img
               src={game.thumbnail}
               alt={game.name}
-              className="object-cover w-full"
+              className="object-cover h-full w-full"
             />
           </div>
 
-          <div className="p-4 leading-normal">
+          <div className="flex flex-col h-full p-4 leading-normal">
             <h2 className="mb-2 text-2xl font-bold tracking-tight">
               {game.name}
             </h2>
@@ -38,6 +38,13 @@ const Games = () => {
             <p>Playing Time: {game.playingtime} minutes</p>
             <p>Number of Plays: {game.numplays}</p>
           </div>
+          <a
+            className="w-full mt-4 p-4 bg-blue-900 hover:bg-slate-900 rounded-lg"
+            href={`https://boardgamegeek.com/boardgame/${game.bggId}`}
+            target="_blank"
+          >
+            View on BGG
+          </a>
         </div>
       ))}
     </div>
