@@ -4,6 +4,7 @@ import convert from "xml-js";
 
 const useBggGames = () => {
   const [collection, setCollection] = useState<Game[] | null>(null);
+  const [allGames, setAllGames] = useState<Game[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -34,6 +35,7 @@ const useBggGames = () => {
         );
         const formattedGames = formatGames(data.items.item);
         setCollection(formattedGames);
+        setAllGames(formattedGames);
         setLoading(false);
       } catch (error) {
         setError("Error fetching data");
@@ -44,7 +46,7 @@ const useBggGames = () => {
     fetchData();
   }, []);
 
-  return { collection, loading, error };
+  return { collection, allGames, setCollection, loading, error };
 };
 
 export default useBggGames;
