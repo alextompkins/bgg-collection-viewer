@@ -39,6 +39,7 @@ const Filters = () => {
       setPlayTimeRange(gameWithLargestPlaytime.playingtime);
     }
   }, [gameWithLargestPlaytime]);
+
   useEffect(() => {
     if (playTimeRange && allGames) {
       const games = allGames.filter((game) => {
@@ -46,7 +47,8 @@ const Filters = () => {
       });
       setCollection(games);
     }
-  });
+  }, [playTimeRange, setCollection, allGames]);
+
   const resetGames = () => {
     if (allGames) {
       setCollection(allGames);
