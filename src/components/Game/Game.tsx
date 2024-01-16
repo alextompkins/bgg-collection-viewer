@@ -9,7 +9,6 @@ const Game: React.FC<TGame> = ({
   maxplayers,
   minplaytime,
   maxplaytime,
-  playingtime,
   numplays,
 }) => {
   return (
