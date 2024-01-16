@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
 import Nav from "../components/Nav/Nav";
-import { BggGamesProvider } from "../context/BggGamesContext";
 
 export default function Root() {
   return (
