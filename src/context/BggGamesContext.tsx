@@ -17,6 +17,8 @@ type BggGamesContextValue = {
   collection: TGame[] | null;
   setCollection: React.Dispatch<React.SetStateAction<TGame[] | null>>;
   allGames: TGame[] | null;
+  gameWithSmallestPlaytime: TGame | null;
+  gameWithLargestPlaytime: TGame | null;
   loading: boolean;
   error: string | null;
 };
@@ -70,11 +72,34 @@ const BggGamesProvider: React.FC<BggGamesContextProps> = ({ children }) => {
 
     return () => abortController.abort();
   }, []);
+  const [gameWithSmallestPlaytime, setGameWithSmallestPlaytime] =
+    useState<TGame | null>(null);
+  const [gameWithLargestPlaytime, setGameWithLargestPlaytime] =
+    useState<TGame | null>(null);
+  useEffect(() => {
+    if (allGames) {
+      const minGame = allGames.reduce(
+        (min, current) =>
+          current.playingtime < min.playingtime ? current : min,
+        allGames[0]
+      );
+      setGameWithSmallestPlaytime(minGame);
+
+      const maxGame = allGames.reduce(
+        (max, current) =>
+          current.playingtime > max.playingtime ? current : max,
+        allGames[0]
+      );
+      setGameWithLargestPlaytime(maxGame);
+    }
+  }, [allGames]);
 
   const value: BggGamesContextValue = {
     collection,
     setCollection,
     allGames,
+    gameWithSmallestPlaytime,
+    gameWithLargestPlaytime,
     loading,
     error,
   };

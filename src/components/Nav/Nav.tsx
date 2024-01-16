@@ -6,12 +6,12 @@ const Nav = () => {
       <h1 className="text-4xl leading-[inherit]">James BGG Stats</h1>
       <ul className=" flex">
         <li>
-          <Link to="/" className="flex p-4 hover:bg-slate-800 rounded-xl">
+          <Link to="/" className="flex p-4 hover:bg-slate-300 rounded-xl">
             Home
           </Link>
         </li>
         <li>
-          <Link to="/games" className="flex p-4 hover:bg-slate-800 rounded-xl">
+          <Link to="/games" className="flex p-4 hover:bg-slate-300 rounded-xl">
             Games
           </Link>
         </li>

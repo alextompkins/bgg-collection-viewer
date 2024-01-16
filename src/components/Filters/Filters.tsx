@@ -1,7 +1,14 @@
+import { ChangeEvent, useEffect, useState } from "react";
 import { useBggGamesContext } from "../../context/BggGamesContext";
 
 const Filters = () => {
-  const { collection, setCollection, allGames } = useBggGamesContext();
+  const {
+    collection,
+    setCollection,
+    allGames,
+    gameWithSmallestPlaytime,
+    gameWithLargestPlaytime,
+  } = useBggGamesContext();
   const selectRandomGame = () => {
     if (collection && allGames) {
       const collectionLength = allGames.length;
@@ -20,6 +27,26 @@ const Filters = () => {
       setCollection(soloGames);
     }
   };
+
+  const [playTimeRange, setPlayTimeRange] = useState(0);
+
+  const handlePlayTimeRangeChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setPlayTimeRange(parseInt(event.target.value));
+  };
+
+  useEffect(() => {
+    if (gameWithLargestPlaytime) {
+      setPlayTimeRange(gameWithLargestPlaytime.playingtime);
+    }
+  }, [gameWithLargestPlaytime]);
+  useEffect(() => {
+    if (playTimeRange && allGames) {
+      const games = allGames.filter((game) => {
+        return game.playingtime <= playTimeRange;
+      });
+      setCollection(games);
+    }
+  });
   const resetGames = () => {
     if (allGames) {
       setCollection(allGames);
@@ -27,10 +54,23 @@ const Filters = () => {
   };
 
   return (
-    <div className="flex flex-row gap-4 align-middle w-full rounded-lg bg-slate-500 p-2">
-      <span className="p-2">Filters:</span>
+    <div className="flex flex-row gap-4 align-middle w-full rounded-lg bg-slate-200 p-2 drop-shadow-md">
+      <span className="p-2 leading-[2]">Filters:</span>
+      <div className="p-2 flex align-middle">
+        <span className="leading-[2]">Avg. Play Time: </span>
+        <input
+          className="ml-4"
+          type="range"
+          step={10}
+          min={gameWithSmallestPlaytime?.playingtime}
+          max={gameWithLargestPlaytime?.playingtime}
+          value={playTimeRange}
+          onChange={handlePlayTimeRangeChange}
+        />
+        <span className="ml-4 leading-[2]">{playTimeRange} mins or less</span>
+      </div>
       <button
-        className="bg-slate-400 hover:bg-slate-300 p-2 rounded-lg"
+        className="bg-slate-200 hover:bg-slate-300 p-2 rounded-lg"
         type="button"
         onClick={selectRandomGame}
       >
@@ -39,12 +79,12 @@ const Filters = () => {
       <button
         type="button"
         onClick={selectSoloGames}
-        className="bg-slate-400 hover:bg-slate-300 p-2 rounded-lg"
+        className="bg-slate-200 hover:bg-slate-300 p-2 rounded-lg"
       >
         Solo Games
       </button>
       <button
-        className="bg-slate-400 hover:bg-slate-300 p-2 rounded-lg"
+        className="bg-slate-200 hover:bg-slate-300 p-2 rounded-lg"
         type="button"
         onClick={resetGames}
       >
