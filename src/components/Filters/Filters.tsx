@@ -10,6 +10,7 @@ const Filters = () => {
     gameWithLargestPlaytime,
   } = useBggGamesContext();
 
+  const [randomGameActive, setRandomGameActive] = useState(false)
   const selectRandomGame = () => {
     if (collection && allGames) {
       const collectionLength = allGames.length;
@@ -18,6 +19,7 @@ const Filters = () => {
       );
       const randomGame = allGames[randomIndex];
       setCollection([randomGame]);
+      setRandomGameActive(true);
     }
   };
   
@@ -51,9 +53,19 @@ const Filters = () => {
     }
   }, [playTimeRange, setCollection, allGames]);
 
+  const selectForSaleGames = () => {
+    if(allGames){
+      const forSaleGames = allGames.filter(game => {
+        return game.fortrade === 1
+      })
+      setCollection(forSaleGames);
+    }
+  }
+
   const resetGames = () => {
     if (allGames) {
       setCollection(allGames);
+      setRandomGameActive(false);
     }
   };
 
@@ -74,11 +86,18 @@ const Filters = () => {
         <span className="ml-4 leading-[2]">{playTimeRange} mins or less</span>
       </div>
       <button
-        className="bg-slate-200 hover:bg-slate-300 p-2 rounded-lg"
+        className={`bg-slate-200 hover:bg-slate-300 p-2 rounded-lg ${randomGameActive ? 'bg-slate-300' : ''}`}
         type="button"
         onClick={selectRandomGame}
       >
         Random Game
+      </button>
+      <button
+        className="bg-slate-200 hover:bg-slate-300 p-2 rounded-lg"
+        type="button"
+        onClick={selectForSaleGames}
+      >
+        For Sale
       </button>
       <button
         type="button"

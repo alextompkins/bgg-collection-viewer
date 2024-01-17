@@ -46,6 +46,8 @@ const BggGamesProvider: React.FC<BggGamesContextProps> = ({ children }) => {
       maxplaytime: parseInt(game.stats._attributes.maxplaytime),
       playingtime: parseInt(game.stats._attributes.playingtime),
       numplays: parseInt(game.numplays._text),
+      comment: ('' || game.comment?._text),
+      fortrade: parseInt(game.status._attributes.fortrade)
     }));
   };
 

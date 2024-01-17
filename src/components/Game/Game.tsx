@@ -9,6 +9,7 @@ const Game: React.FC<TGame> = ({
   maxplayers,
   playingtime,
   numplays,
+  comment
 }) => {
   return (
     <div className="flex flex-col shadow border-gray-700 bg-white my-4">
@@ -30,6 +31,7 @@ const Game: React.FC<TGame> = ({
         </p>
         <p>Avg. Playtime: {playingtime} minutes</p>
         <p>Number of Plays: {numplays}</p>
+        <p>{comment}</p>
       </div>
       <div className="p-4 w-full flex">
         <a
