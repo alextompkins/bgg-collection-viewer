@@ -17,6 +17,7 @@ const Game: React.FC<TGame> = ({
           src={thumbnail}
           alt={name}
           className="object-cover object-top h-full w-full"
+          loading="lazy"
         />
       </div>
 

@@ -9,6 +9,7 @@ const Filters = () => {
     gameWithSmallestPlaytime,
     gameWithLargestPlaytime,
   } = useBggGamesContext();
+
   const selectRandomGame = () => {
     if (collection && allGames) {
       const collectionLength = allGames.length;
@@ -19,6 +20,7 @@ const Filters = () => {
       setCollection([randomGame]);
     }
   };
+  
   const selectSoloGames = () => {
     if (allGames) {
       const soloGames = allGames.filter((game) => {
@@ -56,7 +58,7 @@ const Filters = () => {
   };
 
   return (
-    <div className="flex flex-row gap-4 align-middle w-full rounded-lg bg-slate-200 p-2 drop-shadow-md">
+    <div className="flex flex-col md:flex-row gap-4 align-middle w-full rounded-lg bg-slate-200 p-2 drop-shadow-md">
       <span className="p-2 leading-[2]">Filters:</span>
       <div className="p-2 flex align-middle">
         <span className="leading-[2]">Avg. Play Time: </span>
