@@ -11,6 +11,7 @@ interface GameDetails {
   minAge: string;
   categories: string[];
   mechanics: string[];
+  thumbnail: string;
 }
 
 const NewGames: React.FC = () => {
@@ -51,28 +52,39 @@ const NewGames: React.FC = () => {
               className="flex flex-col shadow border-gray-700 bg-white my-4"
               key={game.id}
             >
-              <h3 className="mb-2 text-2xl font-bold tracking-tight">
-                {game.name} ({game.yearPublished})
-              </h3>
+              <div className="w-full h-64 min-h-64 max-h-64">
+                <img
+                  src={game.thumbnail}
+                  alt={game.name}
+                  className="object-cover object-top h-full w-full"
+                  loading="lazy"
+                />
+              </div>
+              <div className="flex flex-col h-full p-4 leading-normal">
+                <h3 className="mb-2 text-2xl font-bold tracking-tight">
+                  {game.name} ({game.yearPublished})
+                </h3>
 
-              <p>
-                <strong>Players:</strong> {game.minPlayers} - {game.maxPlayers}
-              </p>
-              <p>
-                <strong>Playing Time:</strong> {game.playingTime} minutes
-              </p>
-              <p>
-                <strong>Min Age:</strong> {game.minAge}+
-              </p>
-              <p>
-                <strong>Categories:</strong> {game.categories.join(", ")}
-              </p>
-              <p>
-                <strong>Mechanics:</strong> {game.mechanics.join(", ")}
-              </p>
-              <p>
-                <strong>Description:</strong> {game.description}
-              </p>
+                <p>
+                  <strong>Players:</strong> {game.minPlayers} -{" "}
+                  {game.maxPlayers}
+                </p>
+                <p>
+                  <strong>Playing Time:</strong> {game.playingTime} minutes
+                </p>
+                <p>
+                  <strong>Min Age:</strong> {game.minAge}+
+                </p>
+                <p>
+                  <strong>Categories:</strong> {game.categories.join(", ")}
+                </p>
+                <p>
+                  <strong>Mechanics:</strong> {game.mechanics.join(", ")}
+                </p>
+                <p>
+                  <strong>Description:</strong> {game.description}
+                </p>
+              </div>
             </div>
           ))
         )}
