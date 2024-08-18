@@ -90,6 +90,15 @@ const NewGames: React.FC = () => {
                     dangerouslySetInnerHTML={{ __html: game.description }}
                   ></span>
                 </p>
+                <div className="p-4 w-full flex">
+                  <a
+                    className="text-center w-full mt-4 p-4 border-2 border-slate-300 hover:bg-slate-200"
+                    href={`https://boardgamegeek.com/boardgame/${game.id}`}
+                    target="_blank"
+                  >
+                    View on BGG
+                  </a>
+                </div>
               </div>
             </div>
           ))
