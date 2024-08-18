@@ -45,7 +45,10 @@ const NewGames: React.FC = () => {
       <h2>Lattest Games Added to BGG</h2>
       <div className="grid md:grid-cols-4 gap-4">
         {gameDetails.length === 0 ? (
-          <p>No games found.</p>
+          <p>
+            No games returned, this likely means the server needs to wake up try
+            again in 2 minutes.
+          </p>
         ) : (
           gameDetails.map((game) => (
             <div
