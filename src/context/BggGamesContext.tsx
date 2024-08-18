@@ -72,10 +72,13 @@ const BggGamesProvider: React.FC<BggGamesContextProps> = ({ children }) => {
 
     return () => abortController.abort();
   }, []);
+
   const [gameWithSmallestPlaytime, setGameWithSmallestPlaytime] =
     useState<TGame | null>(null);
+
   const [gameWithLargestPlaytime, setGameWithLargestPlaytime] =
     useState<TGame | null>(null);
+
   useEffect(() => {
     if (allGames) {
       const minGame = allGames.reduce(
