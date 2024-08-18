@@ -8,6 +8,7 @@ export type BggGame = {
   name: {
     _attributes: {
       sortindex: string;
+      fortrade: string;
     };
     _text: string;
   };
@@ -54,6 +55,9 @@ export type BggGame = {
   numplays: {
     _text: string;
   };
+  comment: {
+    _text: string;
+  }
 };
 
 export type TGame = {
@@ -68,4 +72,6 @@ export type TGame = {
   maxplaytime: number;
   playingtime: number;
   numplays: number;
+  comment: string;
+  fortrade: number;
 };

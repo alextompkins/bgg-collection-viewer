@@ -9,6 +9,8 @@ const Filters = () => {
     gameWithSmallestPlaytime,
     gameWithLargestPlaytime,
   } = useBggGamesContext();
+
+  const [randomGameActive, setRandomGameActive] = useState(false)
   const selectRandomGame = () => {
     if (collection && allGames) {
       const collectionLength = allGames.length;
@@ -17,8 +19,10 @@ const Filters = () => {
       );
       const randomGame = allGames[randomIndex];
       setCollection([randomGame]);
+      setRandomGameActive(true);
     }
   };
+  
   const selectSoloGames = () => {
     if (allGames) {
       const soloGames = allGames.filter((game) => {
@@ -49,14 +53,24 @@ const Filters = () => {
     }
   }, [playTimeRange, setCollection, allGames]);
 
+  const selectForSaleGames = () => {
+    if(allGames){
+      const forSaleGames = allGames.filter(game => {
+        return game.fortrade === 1
+      })
+      setCollection(forSaleGames);
+    }
+  }
+
   const resetGames = () => {
     if (allGames) {
       setCollection(allGames);
+      setRandomGameActive(false);
     }
   };
 
   return (
-    <div className="flex flex-row gap-4 align-middle w-full rounded-lg bg-slate-200 p-2 drop-shadow-md">
+    <div className="flex flex-col md:flex-row gap-4 align-middle w-full rounded-lg bg-slate-200 p-2 drop-shadow-md">
       <span className="p-2 leading-[2]">Filters:</span>
       <div className="p-2 flex align-middle">
         <span className="leading-[2]">Avg. Play Time: </span>
@@ -72,11 +86,18 @@ const Filters = () => {
         <span className="ml-4 leading-[2]">{playTimeRange} mins or less</span>
       </div>
       <button
-        className="bg-slate-200 hover:bg-slate-300 p-2 rounded-lg"
+        className={`bg-slate-200 hover:bg-slate-300 p-2 rounded-lg ${randomGameActive ? 'bg-slate-300' : ''}`}
         type="button"
         onClick={selectRandomGame}
       >
         Random Game
+      </button>
+      <button
+        className="bg-slate-200 hover:bg-slate-300 p-2 rounded-lg"
+        type="button"
+        onClick={selectForSaleGames}
+      >
+        For Sale
       </button>
       <button
         type="button"
