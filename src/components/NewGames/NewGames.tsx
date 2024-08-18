@@ -41,9 +41,9 @@ const NewGames: React.FC = () => {
   }
 
   return (
-    <>
+    <div className="max-w-[1600px] mx-auto">
       <h2>Lattest Games Added to BGG</h2>
-      <div className="grid md:grid-cols-3 gap-4">
+      <div className="grid md:grid-cols-4 gap-4">
         {gameDetails.length === 0 ? (
           <p>No games found.</p>
         ) : (
@@ -82,14 +82,17 @@ const NewGames: React.FC = () => {
                   <strong>Mechanics:</strong> {game.mechanics.join(", ")}
                 </p>
                 <p>
-                  <strong>Description:</strong> {game.description}
+                  <strong>Description:</strong>{" "}
+                  <span
+                    dangerouslySetInnerHTML={{ __html: game.description }}
+                  ></span>
                 </p>
               </div>
             </div>
           ))
         )}
       </div>
-    </>
+    </div>
   );
 };
 
