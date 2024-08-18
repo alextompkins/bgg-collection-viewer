@@ -21,7 +21,7 @@ const NewGames: React.FC = () => {
     const fetchGameDetails = async () => {
       try {
         const response = await fetch(
-          process.env.REACT_APP_API_URL || "http://localhost:4000/api/games"
+          import.meta.env.REACT_APP_API_URL || "http://localhost:4000/api/games"
         );
         const games: GameDetails[] = await response.json();
         setGameDetails(games);
