@@ -12,12 +12,23 @@ interface GameDetails {
   categories: string[];
   mechanics: string[];
   thumbnail: string;
+  designer: string[];
+  publisher: string[];
 }
 
 const NewGames: React.FC = () => {
   const [gameDetails, setGameDetails] = useState<GameDetails[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
+  const filteredGames = (games: GameDetails[]) => {
+    return games.filter((game) => {
+      return (
+        game.yearPublished.includes("2024") ||
+        game.yearPublished.includes("2025") ||
+        game.yearPublished.includes("2026")
+      );
+    });
+  };
   useEffect(() => {
     const fetchGameDetails = async () => {
       try {
@@ -25,7 +36,8 @@ const NewGames: React.FC = () => {
           import.meta.env.REACT_APP_API_URL || "http://localhost:4000/api/games"
         );
         const games: GameDetails[] = await response.json();
-        setGameDetails(games);
+        const filtered = filteredGames(games);
+        setGameDetails(filtered);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching game details:", error);
@@ -67,7 +79,12 @@ const NewGames: React.FC = () => {
                 <h3 className="mb-2 text-2xl font-bold tracking-tight">
                   {game.name} ({game.yearPublished})
                 </h3>
-
+                <p>
+                  <strong>Designers:</strong> {game.designer.join(", ")}
+                </p>
+                <p>
+                  <strong>Publishers:</strong> {game.publisher.join(", ")}
+                </p>
                 <p>
                   <strong>Players:</strong> {game.minPlayers} -{" "}
                   {game.maxPlayers}
