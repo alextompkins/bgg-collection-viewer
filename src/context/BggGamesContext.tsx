@@ -6,7 +6,7 @@ import React, {
   useState,
   ReactNode,
 } from "react";
-import { BggGame, TGame } from "../types/types";
+import { TGame } from "../types/types";
 import { XMLParser } from 'fast-xml-parser';
 
 type BggGamesContextProps = {
@@ -30,7 +30,7 @@ const BggGamesContext = createContext<BggGamesContextValue | undefined>(
 const BggGamesProvider: React.FC<BggGamesContextProps> = ({ children }) => {
   const [collection, setCollection] = useState<TGame[] | null>(null);
   const [allGames, setAllGames] = useState<TGame[] | null>(null);
-  const [formattedGames, setFormattedGames] = useState<TGame[] | null>(null);
+  const [, setFormattedGames] = useState<TGame[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
