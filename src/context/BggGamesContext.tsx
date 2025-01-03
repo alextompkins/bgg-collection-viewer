@@ -56,7 +56,7 @@ const BggGamesProvider: React.FC<BggGamesContextProps> = ({ children }) => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://api.geekdo.com/xmlapi/collection/hermokrates?own=1&excludesubtype=boardgameexpansion"
+          "https://api.geekdo.com/xmlapi/collection/boardgaymesjames?own=1&excludesubtype=boardgameexpansion"
         );
         const data = JSON.parse(
           convert.xml2json(await response.text(), { compact: true, spaces: 2 })
