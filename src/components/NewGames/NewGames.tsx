@@ -23,9 +23,7 @@ const NewGames: React.FC = () => {
   const filteredGames = (games: GameDetails[]) => {
     return games.filter((game) => {
       return (
-        game.yearPublished.includes("2024") ||
-        game.yearPublished.includes("2025") ||
-        game.yearPublished.includes("2026")
+        game.yearPublished.includes("2025")
       );
     });
   };
@@ -33,7 +31,7 @@ const NewGames: React.FC = () => {
     const fetchGameDetails = async () => {
       try {
         const response = await fetch(
-          import.meta.env.REACT_APP_API_URL
+          import.meta.env.VITE_API_URL
         );
         const games: GameDetails[] = await response.json();
         const filtered = filteredGames(games);
