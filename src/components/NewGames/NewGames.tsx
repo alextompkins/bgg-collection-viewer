@@ -191,7 +191,7 @@ const NewGames: React.FC = () => {
           Reset Filters
         </button>
       </div>
-      <div className="grid md:grid-cols-4 gap-4">
+      <div>
         {filteredGameDetails.length === 0 ? (
           <p>
             No games returned, this likely means the server needs to wake up try
@@ -200,10 +200,10 @@ const NewGames: React.FC = () => {
         ) : (
           filteredGameDetails.map((game) => (
             <div
-              className="flex flex-col shadow border-gray-700 bg-white my-4"
+              className="flex flex-row shadow border-gray-700 bg-white my-4"
               key={game._id}
             >
-              <div className="w-full h-64 min-h-64 max-h-64">
+              <div className="w-40">
                 <img
                   src={game.thumbnail}
                   alt={game.name}
