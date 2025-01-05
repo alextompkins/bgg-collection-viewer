@@ -209,7 +209,7 @@ const NewGames: React.FC = () => {
               className="flex flex-row shadow border-gray-700 bg-white my-4"
               key={game._id}
             >
-              <div className="w-40">
+              <div className="w-[200px] flex-shrink-0">
                 <img
                   src={game.thumbnail}
                   alt={game.name}
