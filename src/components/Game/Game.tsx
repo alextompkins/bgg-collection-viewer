@@ -12,17 +12,17 @@ const Game: React.FC<TGame> = ({
   comment
 }) => {
   return (
-    <div className="flex flex-col shadow border-gray-700 bg-white my-4">
-      <div className="w-full h-64 min-h-64 max-h-64">
+    <div className="flex flex-row shadow border-gray-700 bg-white my-4">
+      <div className="w-40">
         <img
           src={image}
           alt={name}
-          className="object-cover object-top h-full w-full"
+          className="h-full w-full"
           loading="lazy"
         />
       </div>
 
-      <div className="flex flex-col h-full p-4 leading-normal">
+      <div className="p-4 leading-normal">
         <h2 className="mb-2 text-2xl font-bold tracking-tight">
           {name} ({yearpublished})
         </h2>
