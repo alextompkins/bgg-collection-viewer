@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 interface GameDetails {
+  _id: string;
   id: string;
   name: string;
   description: string;
@@ -63,7 +64,7 @@ const NewGames: React.FC = () => {
           gameDetails.map((game) => (
             <div
               className="flex flex-col shadow border-gray-700 bg-white my-4"
-              key={game.id}
+              key={game._id}
             >
               <div className="w-full h-64 min-h-64 max-h-64">
                 <img
