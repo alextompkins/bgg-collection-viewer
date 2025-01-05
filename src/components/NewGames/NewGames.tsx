@@ -213,7 +213,7 @@ const NewGames: React.FC = () => {
                 <img
                   src={game.thumbnail}
                   alt={game.name}
-                  className="object-cover object-top h-full w-full"
+                  className="w-full"
                   loading="lazy"
                 />
               </div>
