@@ -86,14 +86,11 @@ const NewGames: React.FC = () => {
     fetchGameDetails();
   }, []);
 
-  useEffect(() => {
-    const filtered = filteredGames(gameDetails);
-    setGameDetails(filtered);
-  }, [filters]);
-
   if (loading) {
     return <p>Loading...</p>;
   }
+
+  const filteredGameDetails = filteredGames(gameDetails);
 
   const minPlayersOptions = getUniqueOptions(gameDetails, "minPlayers");
   const maxPlayersOptions = getUniqueOptions(gameDetails, "maxPlayers");
@@ -195,13 +192,13 @@ const NewGames: React.FC = () => {
         </button>
       </div>
       <div className="grid md:grid-cols-4 gap-4">
-        {gameDetails.length === 0 ? (
+        {filteredGameDetails.length === 0 ? (
           <p>
             No games returned, this likely means the server needs to wake up try
             again in 2 minutes.
           </p>
         ) : (
-          gameDetails.map((game) => (
+          filteredGameDetails.map((game) => (
             <div
               className="flex flex-col shadow border-gray-700 bg-white my-4"
               key={game._id}
