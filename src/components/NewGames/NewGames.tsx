@@ -20,14 +20,40 @@ interface GameDetails {
 const NewGames: React.FC = () => {
   const [gameDetails, setGameDetails] = useState<GameDetails[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [filters, setFilters] = useState({
+    yearPublished: "",
+    minPlayers: "",
+    maxPlayers: "",
+    minAge: "",
+    categories: "",
+    mechanics: "",
+  });
+
+  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setFilters({
+      ...filters,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const getUniqueOptions = (games: GameDetails[], key: keyof GameDetails) => {
+    const options = games.map(game => game[key]);
+    return Array.from(new Set(options.flat()));
+  };
 
   const filteredGames = (games: GameDetails[]) => {
     return games.filter((game) => {
       return (
-        game.yearPublished.includes("2025")
+        (filters.yearPublished === "" || game.yearPublished.includes(filters.yearPublished)) &&
+        (filters.minPlayers === "" || game.minPlayers.includes(filters.minPlayers)) &&
+        (filters.maxPlayers === "" || game.maxPlayers.includes(filters.maxPlayers)) &&
+        (filters.minAge === "" || game.minAge.includes(filters.minAge)) &&
+        (filters.categories === "" || game.categories.includes(filters.categories)) &&
+        (filters.mechanics === "" || game.mechanics.includes(filters.mechanics))
       );
     });
   };
+
   useEffect(() => {
     const fetchGameDetails = async () => {
       try {
@@ -51,9 +77,87 @@ const NewGames: React.FC = () => {
     return <p>Loading...</p>;
   }
 
+  const yearPublishedOptions = getUniqueOptions(gameDetails, "yearPublished");
+  const minPlayersOptions = getUniqueOptions(gameDetails, "minPlayers");
+  const maxPlayersOptions = getUniqueOptions(gameDetails, "maxPlayers");
+  const minAgeOptions = getUniqueOptions(gameDetails, "minAge");
+  const categoriesOptions = getUniqueOptions(gameDetails, "categories");
+  const mechanicsOptions = getUniqueOptions(gameDetails, "mechanics");
+
   return (
     <div className="max-w-[1600px] mx-auto">
       <h2>Lattest Games Added to BGG</h2>
+      <div className="mb-4 p-4 border rounded bg-gray-100">
+        <h3 className="mb-2 text-xl font-bold">Filter Games</h3>
+        <div className="grid md:grid-cols-3 gap-4">
+          <select
+            name="yearPublished"
+            value={filters.yearPublished}
+            onChange={handleFilterChange}
+            className="p-2 border rounded"
+          >
+            <option value="">Year Published</option>
+            {yearPublishedOptions.map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+          <select
+            name="minPlayers"
+            value={filters.minPlayers}
+            onChange={handleFilterChange}
+            className="p-2 border rounded"
+          >
+            <option value="">Min Players</option>
+            {minPlayersOptions.map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+          <select
+            name="maxPlayers"
+            value={filters.maxPlayers}
+            onChange={handleFilterChange}
+            className="p-2 border rounded"
+          >
+            <option value="">Max Players</option>
+            {maxPlayersOptions.map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+          <select
+            name="minAge"
+            value={filters.minAge}
+            onChange={handleFilterChange}
+            className="p-2 border rounded"
+          >
+            <option value="">Min Age</option>
+            {minAgeOptions.map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+          <select
+            name="categories"
+            value={filters.categories}
+            onChange={handleFilterChange}
+            className="p-2 border rounded"
+          >
+            <option value="">Categories</option>
+            {categoriesOptions.map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+          <select
+            name="mechanics"
+            value={filters.mechanics}
+            onChange={handleFilterChange}
+            className="p-2 border rounded"
+          >
+            <option value="">Mechanics</option>
+            {mechanicsOptions.map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+        </div>
+      </div>
       <div className="grid md:grid-cols-4 gap-4">
         {gameDetails.length === 0 ? (
           <p>
