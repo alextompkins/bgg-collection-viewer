@@ -29,12 +29,15 @@ const NewGames: React.FC = () => {
     designers: "",
     publishers: "",
   });
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 20;
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFilters({
       ...filters,
       [e.target.name]: e.target.value,
     });
+    setCurrentPage(1); // Reset to first page on filter change
   };
 
   const resetFilters = () => {
@@ -47,6 +50,7 @@ const NewGames: React.FC = () => {
       designers: "",
       publishers: "",
     });
+    setCurrentPage(1); // Reset to first page on reset
   };
 
   const getUniqueOptions = (games: GameDetails[], key: keyof GameDetails) => {
@@ -91,6 +95,8 @@ const NewGames: React.FC = () => {
   }
 
   const filteredGameDetails = filteredGames(gameDetails);
+  const totalPages = Math.ceil(filteredGameDetails.length / itemsPerPage);
+  const currentGames = filteredGameDetails.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   const minPlayersOptions = getUniqueOptions(gameDetails, "minPlayers");
   const maxPlayersOptions = getUniqueOptions(gameDetails, "maxPlayers");
@@ -192,13 +198,13 @@ const NewGames: React.FC = () => {
         </button>
       </div>
       <div>
-        {filteredGameDetails.length === 0 ? (
+        {currentGames.length === 0 ? (
           <p>
             No games returned, this likely means the server needs to wake up try
             again in 2 minutes.
           </p>
         ) : (
-          filteredGameDetails.map((game) => (
+          currentGames.map((game) => (
             <div
               className="flex flex-row shadow border-gray-700 bg-white my-4"
               key={game._id}
@@ -256,6 +262,23 @@ const NewGames: React.FC = () => {
             </div>
           ))
         )}
+      </div>
+      <div className="flex justify-center mt-4">
+        <button
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+          className="p-2 mx-2 border rounded"
+        >
+          Previous
+        </button>
+        <span className="p-2">{currentPage} / {totalPages}</span>
+        <button
+          onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+          disabled={currentPage === totalPages}
+          className="p-2 mx-2 border rounded"
+        >
+          Next
+        </button>
       </div>
     </div>
   );
