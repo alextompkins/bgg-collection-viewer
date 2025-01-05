@@ -37,6 +37,18 @@ const NewGames: React.FC = () => {
     });
   };
 
+  const resetFilters = () => {
+    setFilters({
+      minPlayers: "",
+      maxPlayers: "",
+      minAge: "",
+      categories: "",
+      mechanics: "",
+      designers: "",
+      publishers: "",
+    });
+  };
+
   const getUniqueOptions = (games: GameDetails[], key: keyof GameDetails) => {
     const options = games.map(game => game[key]);
     return Array.from(new Set(options.flat()));
@@ -63,8 +75,7 @@ const NewGames: React.FC = () => {
           import.meta.env.VITE_API_URL
         );
         const games: GameDetails[] = await response.json();
-        const filtered = filteredGames(games);
-        setGameDetails(filtered);
+        setGameDetails(games);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching game details:", error);
@@ -74,6 +85,11 @@ const NewGames: React.FC = () => {
 
     fetchGameDetails();
   }, []);
+
+  useEffect(() => {
+    const filtered = filteredGames(gameDetails);
+    setGameDetails(filtered);
+  }, [filters]);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -171,6 +187,12 @@ const NewGames: React.FC = () => {
             ))}
           </select>
         </div>
+        <button
+          onClick={resetFilters}
+          className="mt-4 p-2 bg-red-500 text-white rounded"
+        >
+          Reset Filters
+        </button>
       </div>
       <div className="grid md:grid-cols-4 gap-4">
         {gameDetails.length === 0 ? (
