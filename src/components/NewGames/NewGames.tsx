@@ -89,7 +89,7 @@ const NewGames: React.FC = () => {
 
   return (
     <div className="max-w-[1600px] mx-auto">
-      <h2>Lattest Games Added to BGG</h2>
+      <h2 className="text-2xl">2025 Games</h2>
       <div className="mb-4 p-4 border rounded bg-gray-100">
         <h3 className="mb-2 text-xl font-bold">Filter Games</h3>
         <div className="grid md:grid-cols-3 gap-4">

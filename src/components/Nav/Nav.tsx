@@ -20,7 +20,7 @@ const Nav = () => {
             to="/new-games"
             className="flex p-4 hover:bg-slate-300 rounded-xl"
           >
-            New BGG Games
+            2025 Games
           </Link>
         </li>
       </ul>
