@@ -21,12 +21,13 @@ const NewGames: React.FC = () => {
   const [gameDetails, setGameDetails] = useState<GameDetails[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [filters, setFilters] = useState({
-    yearPublished: "",
     minPlayers: "",
     maxPlayers: "",
     minAge: "",
     categories: "",
     mechanics: "",
+    designers: "",
+    publishers: "",
   });
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -44,12 +45,13 @@ const NewGames: React.FC = () => {
   const filteredGames = (games: GameDetails[]) => {
     return games.filter((game) => {
       return (
-        (filters.yearPublished === "" || game.yearPublished.includes(filters.yearPublished)) &&
         (filters.minPlayers === "" || game.minPlayers.includes(filters.minPlayers)) &&
         (filters.maxPlayers === "" || game.maxPlayers.includes(filters.maxPlayers)) &&
         (filters.minAge === "" || game.minAge.includes(filters.minAge)) &&
         (filters.categories === "" || game.categories.includes(filters.categories)) &&
-        (filters.mechanics === "" || game.mechanics.includes(filters.mechanics))
+        (filters.mechanics === "" || game.mechanics.includes(filters.mechanics)) &&
+        (filters.designers === "" || game.designer.includes(filters.designers)) &&
+        (filters.publishers === "" || game.publisher.includes(filters.publishers))
       );
     });
   };
@@ -77,12 +79,13 @@ const NewGames: React.FC = () => {
     return <p>Loading...</p>;
   }
 
-  const yearPublishedOptions = getUniqueOptions(gameDetails, "yearPublished");
   const minPlayersOptions = getUniqueOptions(gameDetails, "minPlayers");
   const maxPlayersOptions = getUniqueOptions(gameDetails, "maxPlayers");
   const minAgeOptions = getUniqueOptions(gameDetails, "minAge");
   const categoriesOptions = getUniqueOptions(gameDetails, "categories");
   const mechanicsOptions = getUniqueOptions(gameDetails, "mechanics");
+  const designersOptions = getUniqueOptions(gameDetails, "designer");
+  const publishersOptions = getUniqueOptions(gameDetails, "publisher");
 
   return (
     <div className="max-w-[1600px] mx-auto">
@@ -90,17 +93,6 @@ const NewGames: React.FC = () => {
       <div className="mb-4 p-4 border rounded bg-gray-100">
         <h3 className="mb-2 text-xl font-bold">Filter Games</h3>
         <div className="grid md:grid-cols-3 gap-4">
-          <select
-            name="yearPublished"
-            value={filters.yearPublished}
-            onChange={handleFilterChange}
-            className="p-2 border rounded"
-          >
-            <option value="">Year Published</option>
-            {yearPublishedOptions.map(option => (
-              <option key={option} value={option}>{option}</option>
-            ))}
-          </select>
           <select
             name="minPlayers"
             value={filters.minPlayers}
@@ -153,6 +145,28 @@ const NewGames: React.FC = () => {
           >
             <option value="">Mechanics</option>
             {mechanicsOptions.map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+          <select
+            name="designers"
+            value={filters.designers}
+            onChange={handleFilterChange}
+            className="p-2 border rounded"
+          >
+            <option value="">Designers</option>
+            {designersOptions.map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+          <select
+            name="publishers"
+            value={filters.publishers}
+            onChange={handleFilterChange}
+            className="p-2 border rounded"
+          >
+            <option value="">Publishers</option>
+            {publishersOptions.map(option => (
               <option key={option} value={option}>{option}</option>
             ))}
           </select>
