@@ -2,7 +2,7 @@ import { TGame } from "../../types/types";
 
 const Game: React.FC<TGame> = ({
   bggId,
-  thumbnail,
+  image,
   name,
   yearpublished,
   minplayers,
@@ -15,7 +15,7 @@ const Game: React.FC<TGame> = ({
     <div className="flex flex-col shadow border-gray-700 bg-white my-4">
       <div className="w-full h-64 min-h-64 max-h-64">
         <img
-          src={thumbnail}
+          src={image}
           alt={name}
           className="object-cover object-top h-full w-full"
           loading="lazy"
