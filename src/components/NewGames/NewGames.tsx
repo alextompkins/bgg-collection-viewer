@@ -57,7 +57,7 @@ const NewGames: React.FC = () => {
 
   const getUniqueOptions = (games: GameDetails[], key: keyof GameDetails) => {
     const options = games.map(game => game[key]);
-    return Array.from(new Set(options.flat()));
+    return Array.from(new Set(options.flat())).sort();
   };
 
   const filteredGames = (games: GameDetails[]) => {
@@ -115,7 +115,7 @@ const NewGames: React.FC = () => {
       <h2 className="text-2xl">2025 Games</h2>
       <div className="mb-4 p-4 border rounded bg-gray-100">
         <h3 className="mb-2 text-xl font-bold">Filter Games</h3>
-        <div className="grid md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           <select
             name="minPlayers"
             value={filters.minPlayers}
@@ -207,7 +207,7 @@ const NewGames: React.FC = () => {
         </div>
         <button
           onClick={resetFilters}
-          className="mt-4 p-2 bg-red-500 text-white rounded"
+          className="mt-4 p-2 bg-red-500 text-white rounded w-full sm:w-auto"
         >
           Reset Filters
         </button>
@@ -221,10 +221,10 @@ const NewGames: React.FC = () => {
         ) : (
           currentGames.map((game) => (
             <div
-              className="flex flex-row shadow border-gray-700 bg-white my-4"
+              className="flex flex-col md:flex-row shadow border-gray-700 bg-white my-4"
               key={game._id}
             >
-              <div className="w-[200px] flex-shrink-0">
+              <div className="w-full md:w-[200px] flex-shrink-0">
                 <img
                   src={game.thumbnail}
                   alt={game.name}
