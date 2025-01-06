@@ -28,6 +28,7 @@ const NewGames: React.FC = () => {
     mechanics: "",
     designers: "",
     publishers: "",
+    playingTime: "", // Add playingTime filter
   });
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
@@ -49,6 +50,7 @@ const NewGames: React.FC = () => {
       mechanics: "",
       designers: "",
       publishers: "",
+      playingTime: "", // Reset playingTime filter
     });
     setCurrentPage(1); // Reset to first page on reset
   };
@@ -67,7 +69,8 @@ const NewGames: React.FC = () => {
         (filters.categories === "" || game.categories.includes(filters.categories)) &&
         (filters.mechanics === "" || game.mechanics.includes(filters.mechanics)) &&
         (filters.designers === "" || game.designer.includes(filters.designers)) &&
-        (filters.publishers === "" || game.publisher.includes(filters.publishers))
+        (filters.publishers === "" || game.publisher.includes(filters.publishers)) &&
+        (filters.playingTime === "" || game.playingTime.includes(filters.playingTime)) // Add playingTime filter logic
       );
     });
   };
@@ -105,6 +108,7 @@ const NewGames: React.FC = () => {
   const mechanicsOptions = getUniqueOptions(gameDetails, "mechanics");
   const designersOptions = getUniqueOptions(gameDetails, "designer");
   const publishersOptions = getUniqueOptions(gameDetails, "publisher");
+  const playingTimeOptions = getUniqueOptions(gameDetails, "playingTime"); // Add playingTime options
 
   return (
     <div className="max-w-[1600px] mx-auto">
@@ -186,6 +190,17 @@ const NewGames: React.FC = () => {
           >
             <option value="">Publishers</option>
             {publishersOptions.map(option => (
+              <option key={option} value={option}>{option}</option>
+            ))}
+          </select>
+          <select
+            name="playingTime"
+            value={filters.playingTime}
+            onChange={handleFilterChange}
+            className="p-2 border rounded"
+          >
+            <option value="">Playing Time</option>
+            {playingTimeOptions.map(option => (
               <option key={option} value={option}>{option}</option>
             ))}
           </select>
