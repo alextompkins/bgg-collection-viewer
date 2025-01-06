@@ -55,9 +55,13 @@ const NewGames: React.FC = () => {
     setCurrentPage(1); // Reset to first page on reset
   };
 
-  const getUniqueOptions = (games: GameDetails[], key: keyof GameDetails) => {
+  const getUniqueOptionsWithCount = (games: GameDetails[], key: keyof GameDetails) => {
     const options = games.map(game => game[key]);
-    return Array.from(new Set(options.flat())).sort();
+    const optionCounts = options.flat().reduce((acc: Record<string, number>, option: string) => {
+      acc[option] = (acc[option] || 0) + 1;
+      return acc;
+    }, {});
+    return Object.entries(optionCounts).sort(([a], [b]) => a.localeCompare(b));
   };
 
   const filteredGames = (games: GameDetails[]) => {
@@ -101,14 +105,14 @@ const NewGames: React.FC = () => {
   const totalPages = Math.ceil(filteredGameDetails.length / itemsPerPage);
   const currentGames = filteredGameDetails.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
-  const minPlayersOptions = getUniqueOptions(gameDetails, "minPlayers");
-  const maxPlayersOptions = getUniqueOptions(gameDetails, "maxPlayers");
-  const minAgeOptions = getUniqueOptions(gameDetails, "minAge");
-  const categoriesOptions = getUniqueOptions(gameDetails, "categories");
-  const mechanicsOptions = getUniqueOptions(gameDetails, "mechanics");
-  const designersOptions = getUniqueOptions(gameDetails, "designer");
-  const publishersOptions = getUniqueOptions(gameDetails, "publisher");
-  const playingTimeOptions = getUniqueOptions(gameDetails, "playingTime"); // Add playingTime options
+  const minPlayersOptions = getUniqueOptionsWithCount(gameDetails, "minPlayers");
+  const maxPlayersOptions = getUniqueOptionsWithCount(gameDetails, "maxPlayers");
+  const minAgeOptions = getUniqueOptionsWithCount(gameDetails, "minAge");
+  const categoriesOptions = getUniqueOptionsWithCount(gameDetails, "categories");
+  const mechanicsOptions = getUniqueOptionsWithCount(gameDetails, "mechanics");
+  const designersOptions = getUniqueOptionsWithCount(gameDetails, "designer");
+  const publishersOptions = getUniqueOptionsWithCount(gameDetails, "publisher");
+  const playingTimeOptions = getUniqueOptionsWithCount(gameDetails, "playingTime"); // Add playingTime options
 
   return (
     <div className="max-w-[1600px] mx-auto">
@@ -123,8 +127,8 @@ const NewGames: React.FC = () => {
             className="p-2 border rounded"
           >
             <option value="">Min Players</option>
-            {minPlayersOptions.map(option => (
-              <option key={option} value={option}>{option}</option>
+            {minPlayersOptions.map(([option, count]) => (
+              <option key={option} value={option}>{option} ({count})</option>
             ))}
           </select>
           <select
@@ -134,8 +138,8 @@ const NewGames: React.FC = () => {
             className="p-2 border rounded"
           >
             <option value="">Max Players</option>
-            {maxPlayersOptions.map(option => (
-              <option key={option} value={option}>{option}</option>
+            {maxPlayersOptions.map(([option, count]) => (
+              <option key={option} value={option}>{option} ({count})</option>
             ))}
           </select>
           <select
@@ -145,8 +149,8 @@ const NewGames: React.FC = () => {
             className="p-2 border rounded"
           >
             <option value="">Min Age</option>
-            {minAgeOptions.map(option => (
-              <option key={option} value={option}>{option}</option>
+            {minAgeOptions.map(([option, count]) => (
+              <option key={option} value={option}>{option} ({count})</option>
             ))}
           </select>
           <select
@@ -156,8 +160,8 @@ const NewGames: React.FC = () => {
             className="p-2 border rounded"
           >
             <option value="">Categories</option>
-            {categoriesOptions.map(option => (
-              <option key={option} value={option}>{option}</option>
+            {categoriesOptions.map(([option, count]) => (
+              <option key={option} value={option}>{option} ({count})</option>
             ))}
           </select>
           <select
@@ -167,8 +171,8 @@ const NewGames: React.FC = () => {
             className="p-2 border rounded"
           >
             <option value="">Mechanics</option>
-            {mechanicsOptions.map(option => (
-              <option key={option} value={option}>{option}</option>
+            {mechanicsOptions.map(([option, count]) => (
+              <option key={option} value={option}>{option} ({count})</option>
             ))}
           </select>
           <select
@@ -178,8 +182,8 @@ const NewGames: React.FC = () => {
             className="p-2 border rounded"
           >
             <option value="">Designers</option>
-            {designersOptions.map(option => (
-              <option key={option} value={option}>{option}</option>
+            {designersOptions.map(([option, count]) => (
+              <option key={option} value={option}>{option} ({count})</option>
             ))}
           </select>
           <select
@@ -189,8 +193,8 @@ const NewGames: React.FC = () => {
             className="p-2 border rounded"
           >
             <option value="">Publishers</option>
-            {publishersOptions.map(option => (
-              <option key={option} value={option}>{option}</option>
+            {publishersOptions.map(([option, count]) => (
+              <option key={option} value={option}>{option} ({count})</option>
             ))}
           </select>
           <select
@@ -200,8 +204,8 @@ const NewGames: React.FC = () => {
             className="p-2 border rounded"
           >
             <option value="">Playing Time</option>
-            {playingTimeOptions.map(option => (
-              <option key={option} value={option}>{option}</option>
+            {playingTimeOptions.map(([option, count]) => (
+              <option key={option} value={option}>{option} ({count})</option>
             ))}
           </select>
         </div>
