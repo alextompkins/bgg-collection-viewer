@@ -14,6 +14,7 @@ interface GameDetails {
   mechanics: string[];
   thumbnail: string;
   designer: string[];
+  artist: string[];
   publisher: string[];
 }
 
@@ -27,6 +28,7 @@ const NewGames: React.FC = () => {
     categories: "",
     mechanics: "",
     designers: "",
+    artist: "",
     publishers: "",
     playingTime: "", // Add playingTime filter
   });
@@ -49,6 +51,7 @@ const NewGames: React.FC = () => {
       categories: "",
       mechanics: "",
       designers: "",
+      artist: "",
       publishers: "",
       playingTime: "", // Reset playingTime filter
     });
@@ -73,6 +76,7 @@ const NewGames: React.FC = () => {
         (filters.categories === "" || game.categories.includes(filters.categories)) &&
         (filters.mechanics === "" || game.mechanics.includes(filters.mechanics)) &&
         (filters.designers === "" || game.designer.includes(filters.designers)) &&
+        (filters.designers === "" || game.designer.includes(filters.artist)) &&
         (filters.publishers === "" || game.publisher.includes(filters.publishers)) &&
         (filters.playingTime === "" || game.playingTime === filters.playingTime) // Ensure exact match for playingTime
       );
@@ -98,7 +102,13 @@ const NewGames: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p><button type="button" className="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150 cursor-not-allowed" disabled>
+    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+    </svg>
+    Loading... this may take a while I'm on free tier servers
+  </button></p>;
   }
 
   const filteredGameDetails = filteredGames(gameDetails);
@@ -111,6 +121,7 @@ const NewGames: React.FC = () => {
   const categoriesOptions = getUniqueOptionsWithCount(gameDetails, "categories");
   const mechanicsOptions = getUniqueOptionsWithCount(gameDetails, "mechanics");
   const designersOptions = getUniqueOptionsWithCount(gameDetails, "designer");
+  const artistOptions = getUniqueOptionsWithCount(gameDetails, "artist");
   const publishersOptions = getUniqueOptionsWithCount(gameDetails, "publisher");
   const playingTimeOptions = getUniqueOptionsWithCount(gameDetails, "playingTime"); // Add playingTime options
 
@@ -187,6 +198,17 @@ const NewGames: React.FC = () => {
             ))}
           </select>
           <select
+            name="artists"
+            value={filters.artist}
+            onChange={handleFilterChange}
+            className="p-2 border rounded"
+          >
+            <option value="">Artists</option>
+            {artistOptions.map(([option, count]) => (
+              <option key={option} value={option}>{option} ({count})</option>
+            ))}
+          </select>
+          <select
             name="publishers"
             value={filters.publishers}
             onChange={handleFilterChange}
@@ -242,6 +264,9 @@ const NewGames: React.FC = () => {
                 </h3>
                 <p>
                   <strong>Designers:</strong> {game.designer.join(", ")}
+                </p>
+                <p>
+                  <strong>Artists:</strong> {game.artist.join(", ")}
                 </p>
                 <p>
                   <strong>Publishers:</strong> {game.publisher.join(", ")}
