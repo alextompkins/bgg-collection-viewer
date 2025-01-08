@@ -198,8 +198,8 @@ const NewGames: React.FC = () => {
             ))}
           </select>
           <select
-            name="artists"
-            value={filters.artist}
+            name="artist" // Change from artists to artist
+            value={filters.artist} // Change from artists to artist
             onChange={handleFilterChange}
             className="p-2 border rounded"
           >
