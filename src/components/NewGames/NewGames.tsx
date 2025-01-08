@@ -76,7 +76,7 @@ const NewGames: React.FC = () => {
         (filters.categories === "" || game.categories.includes(filters.categories)) &&
         (filters.mechanics === "" || game.mechanics.includes(filters.mechanics)) &&
         (filters.designers === "" || game.designer.includes(filters.designers)) &&
-        (filters.designers === "" || game.designer.includes(filters.artist)) &&
+        (filters.artist === "" || game.designer.includes(filters.artist)) &&
         (filters.publishers === "" || game.publisher.includes(filters.publishers)) &&
         (filters.playingTime === "" || game.playingTime === filters.playingTime) // Ensure exact match for playingTime
       );
