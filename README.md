@@ -1,6 +1,6 @@
-# James Board Game Geek API App
+# Board Game Geek | Collection Viewer
 
-This app is to showcase custom react hooks, react router, react, and tailwind so far.
+A tiny (embeddable) widget for viewing a specific BGG collection.
 
 ## Getting started
 
@@ -9,6 +9,4 @@ This is built on Vite, simply run:
 
 ## Deployment
 
-Automated deployment though github branch watching using On Render.
-
-https://bgg-app.onrender.com
+Automated via Netlify, see https://bgg-collection-viewer.netlify.app/

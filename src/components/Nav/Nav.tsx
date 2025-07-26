@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 export const Nav = () => (
   <div className="flex flex-col md:flex-row gap-4">
-    <h1 className="text-4xl leading-[inherit]">James BGG Stats</h1>
+    <h1 className="text-4xl leading-[inherit]">BGG Collection Viewer</h1>
     <ul className=" flex">
       <li>
         <Link to="/" className="flex p-4 hover:bg-slate-300 rounded-xl">
