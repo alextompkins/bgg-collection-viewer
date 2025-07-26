@@ -1,16 +1,17 @@
 import { XMLParser } from 'fast-xml-parser';
-import type { ReactNode } from 'react';
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import type { ComponentChildren } from 'preact';
+import { createContext } from 'preact';
+import { useContext, useEffect, useState } from 'preact/hooks';
 
 import type { TGame } from '../types/types';
 
 type BggGamesContextProps = {
-  children: ReactNode;
+  children: ComponentChildren;
 };
 
 type BggGamesContextValue = {
   collection: TGame[] | null;
-  setCollection: React.Dispatch<React.SetStateAction<TGame[] | null>>;
+  setCollection: (collection: TGame[]) => void;
   allGames: TGame[] | null;
   gameWithSmallestPlaytime: TGame | null;
   gameWithLargestPlaytime: TGame | null;

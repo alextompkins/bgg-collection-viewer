@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import type { JSX } from 'preact';
+import { useEffect, useState } from 'preact/hooks';
 
 interface GameDetails {
   _id: string;
@@ -35,10 +36,11 @@ export const NewGames = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
 
-  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleFilterChange = (e: JSX.TargetedEvent<HTMLSelectElement>) => {
+    const target = e.target as HTMLSelectElement;
     setFilters({
       ...filters,
-      [e.target.name]: e.target.value,
+      [target.name]: target.value,
     });
     setCurrentPage(1); // Reset to first page on filter change
   };

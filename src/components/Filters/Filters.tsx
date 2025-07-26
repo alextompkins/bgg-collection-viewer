@@ -1,5 +1,5 @@
-import type { ChangeEvent } from 'react';
-import { useEffect, useState } from 'react';
+import type { JSX } from 'preact';
+import { useEffect, useState } from 'preact/hooks';
 
 import { useBggGamesContext } from '../../context/BggGamesContext';
 
@@ -29,8 +29,8 @@ export const Filters = () => {
 
   const [playTimeRange, setPlayTimeRange] = useState(0);
 
-  const handlePlayTimeRangeChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setPlayTimeRange(parseInt(event.target.value));
+  const handlePlayTimeRangeChange = (event: JSX.TargetedInputEvent<HTMLInputElement>) => {
+    setPlayTimeRange(parseInt((event.target as HTMLInputElement).value));
   };
 
   useEffect(() => {

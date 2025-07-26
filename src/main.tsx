@@ -1,7 +1,6 @@
 import './index.css';
 
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import { render } from 'preact';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { NewGames } from './components/NewGames/NewGames.tsx';
@@ -32,8 +31,4 @@ const router = createBrowserRouter([
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>,
-);
+render(<RouterProvider router={router} />, document.getElementById('root')!);
