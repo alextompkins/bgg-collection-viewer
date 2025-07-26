@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-import BggLogo from '../bgglogo.png';
+import PoweredByBgg from '../assets/powered-by-bgg.png';
 import { Nav } from '../components/Nav/Nav';
 
 export const Root = () => (
@@ -12,7 +12,7 @@ export const Root = () => (
       <Outlet />
     </div>
     <div className="w-full bg-slate-100 p-4">
-      <img src={BggLogo} alt="Board Game Geek Logo" className="w-64 mx-auto" />
+      <img src={PoweredByBgg} alt="Board Game Geek Logo" className="w-64 mx-auto" />
     </div>
   </div>
 );
