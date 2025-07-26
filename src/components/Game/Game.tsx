@@ -1,6 +1,6 @@
 import type { TGame } from '../../types/types';
 
-const Game: React.FC<TGame> = ({
+export const Game = ({
   bggId,
   image,
   name,
@@ -10,7 +10,7 @@ const Game: React.FC<TGame> = ({
   playingtime,
   numplays,
   comment,
-}) => {
+}: TGame) => {
   return (
     <div className="flex flex-col shadow border-gray-700 bg-white my-4">
       <div className="w-full h-64 min-h-64 max-h-64">
@@ -46,5 +46,3 @@ const Game: React.FC<TGame> = ({
     </div>
   );
 };
-
-export default Game;

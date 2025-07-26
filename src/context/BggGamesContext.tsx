@@ -1,4 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
 import { XMLParser } from 'fast-xml-parser';
 import type { ReactNode } from 'react';
 import React, { createContext, useContext, useEffect, useState } from 'react';
@@ -21,10 +20,10 @@ type BggGamesContextValue = {
 
 const BggGamesContext = createContext<BggGamesContextValue | undefined>(undefined);
 
-const BggGamesProvider: React.FC<BggGamesContextProps> = ({ children }) => {
+const BggGamesProvider = ({ children }: BggGamesContextProps) => {
   const [collection, setCollection] = useState<TGame[] | null>(null);
   const [allGames, setAllGames] = useState<TGame[] | null>(null);
-  const [, setFormattedGames] = useState<TGame[] | null>(null);
+  const [_formattedGames, setFormattedGames] = useState<TGame[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 

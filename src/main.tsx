@@ -4,11 +4,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import NewGames from './components/NewGames/NewGames.tsx';
-import Games from './pages/Games/Games.tsx';
-import Home from './pages/Home/Home.tsx';
-import ErrorPage from './routes/error-page';
-import Root from './routes/root';
+import { NewGames } from './components/NewGames/NewGames.tsx';
+import { Games } from './pages/Games/Games.tsx';
+import { Home } from './pages/Home/Home.tsx';
+import { ErrorPage } from './routes/error-page';
+import { Root } from './routes/root';
 
 const router = createBrowserRouter([
   {

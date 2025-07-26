@@ -1,8 +1,8 @@
-import Filters from '../../components/Filters/Filters';
-import GamesList from '../../components/GamesList/GamesList';
+import { Filters } from '../../components/Filters/Filters';
+import { GamesList } from '../../components/GamesList/GamesList';
 import { BggGamesProvider } from '../../context/BggGamesContext';
 
-const Games = () => {
+export const Games = () => {
   return (
     <BggGamesProvider>
       <Filters />
@@ -10,5 +10,3 @@ const Games = () => {
     </BggGamesProvider>
   );
 };
-
-export default Games;

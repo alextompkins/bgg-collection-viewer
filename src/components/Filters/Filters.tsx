@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 import { useBggGamesContext } from '../../context/BggGamesContext';
 
-const Filters = () => {
+export const Filters = () => {
   const { collection, setCollection, allGames, gameWithSmallestPlaytime, gameWithLargestPlaytime } =
     useBggGamesContext();
 
@@ -111,5 +111,3 @@ const Filters = () => {
     </div>
   );
 };
-
-export default Filters;
