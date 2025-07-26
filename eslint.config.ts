@@ -68,4 +68,5 @@ export default defineConfig([
       'import/no-default-export': 'off', // playground/storybook/vite/vitest need default exports
     },
   },
+  eslintConfigPrettier,
 ]);
