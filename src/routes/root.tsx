@@ -1,6 +1,7 @@
-import { Outlet } from "react-router-dom";
-import Nav from "../components/Nav/Nav";
-import BggLogo from "../bgglogo.png";
+import { Outlet } from 'react-router-dom';
+
+import BggLogo from '../bgglogo.png';
+import Nav from '../components/Nav/Nav';
 
 export default function Root() {
   return (
@@ -12,7 +13,7 @@ export default function Root() {
         <Outlet />
       </div>
       <div className="w-full bg-slate-100 p-4">
-          <img src={BggLogo} alt="Board Game Geek Logo" className="w-64 mx-auto" />
+        <img src={BggLogo} alt="Board Game Geek Logo" className="w-64 mx-auto" />
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from 'react';
 
 interface GameDetails {
   _id: string;
@@ -22,15 +22,15 @@ const NewGames: React.FC = () => {
   const [gameDetails, setGameDetails] = useState<GameDetails[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [filters, setFilters] = useState({
-    minPlayers: "",
-    maxPlayers: "",
-    minAge: "",
-    categories: "",
-    mechanics: "",
-    designers: "",
-    artist: "",
-    publishers: "",
-    playingTime: "", // Add playingTime filter
+    minPlayers: '',
+    maxPlayers: '',
+    minAge: '',
+    categories: '',
+    mechanics: '',
+    designers: '',
+    artist: '',
+    publishers: '',
+    playingTime: '', // Add playingTime filter
   });
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
@@ -45,21 +45,21 @@ const NewGames: React.FC = () => {
 
   const resetFilters = () => {
     setFilters({
-      minPlayers: "",
-      maxPlayers: "",
-      minAge: "",
-      categories: "",
-      mechanics: "",
-      designers: "",
-      artist: "",
-      publishers: "",
-      playingTime: "", // Reset playingTime filter
+      minPlayers: '',
+      maxPlayers: '',
+      minAge: '',
+      categories: '',
+      mechanics: '',
+      designers: '',
+      artist: '',
+      publishers: '',
+      playingTime: '', // Reset playingTime filter
     });
     setCurrentPage(1); // Reset to first page on reset
   };
 
   const getUniqueOptionsWithCount = (games: GameDetails[], key: keyof GameDetails) => {
-    const options = games.map(game => game[key]);
+    const options = games.map((game) => game[key]);
     const optionCounts = options.flat().reduce((acc: Record<string, number>, option: string) => {
       acc[option] = (acc[option] || 0) + 1;
       return acc;
@@ -70,15 +70,15 @@ const NewGames: React.FC = () => {
   const filteredGames = (games: GameDetails[]) => {
     return games.filter((game) => {
       return (
-        (filters.minPlayers === "" || game.minPlayers.includes(filters.minPlayers)) &&
-        (filters.maxPlayers === "" || game.maxPlayers.includes(filters.maxPlayers)) &&
-        (filters.minAge === "" || game.minAge.includes(filters.minAge)) &&
-        (filters.categories === "" || game.categories.includes(filters.categories)) &&
-        (filters.mechanics === "" || game.mechanics.includes(filters.mechanics)) &&
-        (filters.designers === "" || game.designer.includes(filters.designers)) &&
-        (filters.artist === "" || game.artist.includes(filters.artist)) &&
-        (filters.publishers === "" || game.publisher.includes(filters.publishers)) &&
-        (filters.playingTime === "" || game.playingTime === filters.playingTime) // Ensure exact match for playingTime
+        (filters.minPlayers === '' || game.minPlayers.includes(filters.minPlayers)) &&
+        (filters.maxPlayers === '' || game.maxPlayers.includes(filters.maxPlayers)) &&
+        (filters.minAge === '' || game.minAge.includes(filters.minAge)) &&
+        (filters.categories === '' || game.categories.includes(filters.categories)) &&
+        (filters.mechanics === '' || game.mechanics.includes(filters.mechanics)) &&
+        (filters.designers === '' || game.designer.includes(filters.designers)) &&
+        (filters.artist === '' || game.artist.includes(filters.artist)) &&
+        (filters.publishers === '' || game.publisher.includes(filters.publishers)) &&
+        (filters.playingTime === '' || game.playingTime === filters.playingTime) // Ensure exact match for playingTime
       );
     });
   };
@@ -86,14 +86,12 @@ const NewGames: React.FC = () => {
   useEffect(() => {
     const fetchGameDetails = async () => {
       try {
-        const response = await fetch(
-          import.meta.env.VITE_API_URL
-        );
+        const response = await fetch(import.meta.env.VITE_API_URL);
         const games: GameDetails[] = await response.json();
         setGameDetails(games);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching game details:", error);
+        console.error('Error fetching game details:', error);
         setLoading(false);
       }
     };
@@ -102,28 +100,55 @@ const NewGames: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <p><button type="button" className="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150 cursor-not-allowed" disabled>
-    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-    </svg>
-    Loading... this may take a while I'm on free tier servers
-  </button></p>;
+    return (
+      <p>
+        <button
+          type="button"
+          className="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150 cursor-not-allowed"
+          disabled
+        >
+          <svg
+            className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            ></circle>
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+          Loading... this may take a while I'm on free tier servers
+        </button>
+      </p>
+    );
   }
 
   const filteredGameDetails = filteredGames(gameDetails);
   const totalPages = Math.ceil(filteredGameDetails.length / itemsPerPage);
-  const currentGames = filteredGameDetails.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+  const currentGames = filteredGameDetails.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage,
+  );
 
-  const minPlayersOptions = getUniqueOptionsWithCount(gameDetails, "minPlayers");
-  const maxPlayersOptions = getUniqueOptionsWithCount(gameDetails, "maxPlayers");
-  const minAgeOptions = getUniqueOptionsWithCount(gameDetails, "minAge");
-  const categoriesOptions = getUniqueOptionsWithCount(gameDetails, "categories");
-  const mechanicsOptions = getUniqueOptionsWithCount(gameDetails, "mechanics");
-  const designersOptions = getUniqueOptionsWithCount(gameDetails, "designer");
-  const artistOptions = getUniqueOptionsWithCount(gameDetails, "artist");
-  const publishersOptions = getUniqueOptionsWithCount(gameDetails, "publisher");
-  const playingTimeOptions = getUniqueOptionsWithCount(gameDetails, "playingTime"); // Add playingTime options
+  const minPlayersOptions = getUniqueOptionsWithCount(gameDetails, 'minPlayers');
+  const maxPlayersOptions = getUniqueOptionsWithCount(gameDetails, 'maxPlayers');
+  const minAgeOptions = getUniqueOptionsWithCount(gameDetails, 'minAge');
+  const categoriesOptions = getUniqueOptionsWithCount(gameDetails, 'categories');
+  const mechanicsOptions = getUniqueOptionsWithCount(gameDetails, 'mechanics');
+  const designersOptions = getUniqueOptionsWithCount(gameDetails, 'designer');
+  const artistOptions = getUniqueOptionsWithCount(gameDetails, 'artist');
+  const publishersOptions = getUniqueOptionsWithCount(gameDetails, 'publisher');
+  const playingTimeOptions = getUniqueOptionsWithCount(gameDetails, 'playingTime'); // Add playingTime options
 
   return (
     <div className="max-w-[1600px] mx-auto">
@@ -139,7 +164,9 @@ const NewGames: React.FC = () => {
           >
             <option value="">Min Players</option>
             {minPlayersOptions.map(([option, count]) => (
-              <option key={option} value={option}>{option} ({count})</option>
+              <option key={option} value={option}>
+                {option} ({count})
+              </option>
             ))}
           </select>
           <select
@@ -150,7 +177,9 @@ const NewGames: React.FC = () => {
           >
             <option value="">Max Players</option>
             {maxPlayersOptions.map(([option, count]) => (
-              <option key={option} value={option}>{option} ({count})</option>
+              <option key={option} value={option}>
+                {option} ({count})
+              </option>
             ))}
           </select>
           <select
@@ -161,7 +190,9 @@ const NewGames: React.FC = () => {
           >
             <option value="">Min Age</option>
             {minAgeOptions.map(([option, count]) => (
-              <option key={option} value={option}>{option} ({count})</option>
+              <option key={option} value={option}>
+                {option} ({count})
+              </option>
             ))}
           </select>
           <select
@@ -172,7 +203,9 @@ const NewGames: React.FC = () => {
           >
             <option value="">Categories</option>
             {categoriesOptions.map(([option, count]) => (
-              <option key={option} value={option}>{option} ({count})</option>
+              <option key={option} value={option}>
+                {option} ({count})
+              </option>
             ))}
           </select>
           <select
@@ -183,7 +216,9 @@ const NewGames: React.FC = () => {
           >
             <option value="">Mechanics</option>
             {mechanicsOptions.map(([option, count]) => (
-              <option key={option} value={option}>{option} ({count})</option>
+              <option key={option} value={option}>
+                {option} ({count})
+              </option>
             ))}
           </select>
           <select
@@ -194,7 +229,9 @@ const NewGames: React.FC = () => {
           >
             <option value="">Designers</option>
             {designersOptions.map(([option, count]) => (
-              <option key={option} value={option}>{option} ({count})</option>
+              <option key={option} value={option}>
+                {option} ({count})
+              </option>
             ))}
           </select>
           <select
@@ -205,7 +242,9 @@ const NewGames: React.FC = () => {
           >
             <option value="">Artists</option>
             {artistOptions.map(([option, count]) => (
-              <option key={option} value={option}>{option} ({count})</option>
+              <option key={option} value={option}>
+                {option} ({count})
+              </option>
             ))}
           </select>
           <select
@@ -216,7 +255,9 @@ const NewGames: React.FC = () => {
           >
             <option value="">Publishers</option>
             {publishersOptions.map(([option, count]) => (
-              <option key={option} value={option}>{option} ({count})</option>
+              <option key={option} value={option}>
+                {option} ({count})
+              </option>
             ))}
           </select>
           <select
@@ -227,7 +268,9 @@ const NewGames: React.FC = () => {
           >
             <option value="">Playing Time</option>
             {playingTimeOptions.map(([option, count]) => (
-              <option key={option} value={option}>{option} ({count})</option>
+              <option key={option} value={option}>
+                {option} ({count})
+              </option>
             ))}
           </select>
         </div>
@@ -241,8 +284,7 @@ const NewGames: React.FC = () => {
       <div>
         {currentGames.length === 0 ? (
           <p>
-            No games returned, this likely means the server needs to wake up try
-            again in 2 minutes.
+            No games returned, this likely means the server needs to wake up try again in 2 minutes.
           </p>
         ) : (
           currentGames.map((game) => (
@@ -251,29 +293,23 @@ const NewGames: React.FC = () => {
               key={game._id}
             >
               <div className="w-full md:w-[200px] flex-shrink-0">
-                <img
-                  src={game.thumbnail}
-                  alt={game.name}
-                  className="w-full"
-                  loading="lazy"
-                />
+                <img src={game.thumbnail} alt={game.name} className="w-full" loading="lazy" />
               </div>
               <div className="flex flex-col h-full p-4 leading-normal">
                 <h3 className="mb-2 text-2xl font-bold tracking-tight">
                   {game.name} ({game.yearPublished})
                 </h3>
                 <p>
-                  <strong>Designers:</strong> {game.designer.join(", ")}
+                  <strong>Designers:</strong> {game.designer.join(', ')}
                 </p>
                 <p>
-                  <strong>Artists:</strong> {game.artist.join(", ")}
+                  <strong>Artists:</strong> {game.artist.join(', ')}
                 </p>
                 <p>
-                  <strong>Publishers:</strong> {game.publisher.join(", ")}
+                  <strong>Publishers:</strong> {game.publisher.join(', ')}
                 </p>
                 <p>
-                  <strong>Players:</strong> {game.minPlayers} -{" "}
-                  {game.maxPlayers}
+                  <strong>Players:</strong> {game.minPlayers} - {game.maxPlayers}
                 </p>
                 <p>
                   <strong>Playing Time:</strong> {game.playingTime} minutes
@@ -282,22 +318,21 @@ const NewGames: React.FC = () => {
                   <strong>Min Age:</strong> {game.minAge}+
                 </p>
                 <p>
-                  <strong>Categories:</strong> {game.categories.join(", ")}
+                  <strong>Categories:</strong> {game.categories.join(', ')}
                 </p>
                 <p>
-                  <strong>Mechanics:</strong> {game.mechanics.join(", ")}
+                  <strong>Mechanics:</strong> {game.mechanics.join(', ')}
                 </p>
                 <p>
-                  <strong>Description:</strong>{" "}
-                  <span
-                    dangerouslySetInnerHTML={{ __html: game.description }}
-                  ></span>
+                  <strong>Description:</strong>{' '}
+                  <span dangerouslySetInnerHTML={{ __html: game.description }}></span>
                 </p>
                 <div className="p-4 w-full flex">
                   <a
                     className="text-center w-full mt-4 p-4 border-2 border-slate-300 hover:bg-slate-200"
                     href={`https://boardgamegeek.com/boardgame/${game.id}`}
                     target="_blank"
+                    rel="noreferrer"
                   >
                     View on BGG
                   </a>
@@ -315,7 +350,9 @@ const NewGames: React.FC = () => {
         >
           Previous
         </button>
-        <span className="p-2">{currentPage} / {totalPages}</span>
+        <span className="p-2">
+          {currentPage} / {totalPages}
+        </span>
         <button
           onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
           disabled={currentPage === totalPages}

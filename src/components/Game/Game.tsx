@@ -1,4 +1,4 @@
-import { TGame } from "../../types/types";
+import type { TGame } from '../../types/types';
 
 const Game: React.FC<TGame> = ({
   bggId,
@@ -9,7 +9,7 @@ const Game: React.FC<TGame> = ({
   maxplayers,
   playingtime,
   numplays,
-  comment
+  comment,
 }) => {
   return (
     <div className="flex flex-col shadow border-gray-700 bg-white my-4">
@@ -38,6 +38,7 @@ const Game: React.FC<TGame> = ({
           className="text-center w-full mt-4 p-4 border-2 border-slate-300 hover:bg-slate-200"
           href={`https://boardgamegeek.com/boardgame/${bggId}`}
           target="_blank"
+          rel="noreferrer"
         >
           View on BGG
         </a>

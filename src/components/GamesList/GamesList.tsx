@@ -1,6 +1,6 @@
-import { useBggGamesContext } from "../../context/BggGamesContext";
-import { TGame } from "../../types/types";
-import Game from "../Game/Game";
+import { useBggGamesContext } from '../../context/BggGamesContext';
+import type { TGame } from '../../types/types';
+import Game from '../Game/Game';
 
 const GamesList = () => {
   const { collection, loading, error } = useBggGamesContext();

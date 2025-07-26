@@ -1,28 +1,23 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import { useBggGamesContext } from "../../context/BggGamesContext";
+import type { ChangeEvent } from 'react';
+import { useEffect, useState } from 'react';
+
+import { useBggGamesContext } from '../../context/BggGamesContext';
 
 const Filters = () => {
-  const {
-    collection,
-    setCollection,
-    allGames,
-    gameWithSmallestPlaytime,
-    gameWithLargestPlaytime,
-  } = useBggGamesContext();
+  const { collection, setCollection, allGames, gameWithSmallestPlaytime, gameWithLargestPlaytime } =
+    useBggGamesContext();
 
-  const [randomGameActive, setRandomGameActive] = useState(false)
+  const [randomGameActive, setRandomGameActive] = useState(false);
   const selectRandomGame = () => {
     if (collection && allGames) {
       const collectionLength = allGames.length;
-      const randomIndex = Math.floor(
-        Math.random() * (collectionLength - 1) + 1
-      );
+      const randomIndex = Math.floor(Math.random() * (collectionLength - 1) + 1);
       const randomGame = allGames[randomIndex];
       setCollection([randomGame]);
       setRandomGameActive(true);
     }
   };
-  
+
   const selectSoloGames = () => {
     if (allGames) {
       const soloGames = allGames.filter((game) => {
@@ -54,13 +49,13 @@ const Filters = () => {
   }, [playTimeRange, setCollection, allGames]);
 
   const selectForSaleGames = () => {
-    if(allGames){
-      const forSaleGames = allGames.filter(game => {
-        return game.fortrade === 1
-      })
+    if (allGames) {
+      const forSaleGames = allGames.filter((game) => {
+        return game.fortrade === 1;
+      });
       setCollection(forSaleGames);
     }
-  }
+  };
 
   const resetGames = () => {
     if (allGames) {

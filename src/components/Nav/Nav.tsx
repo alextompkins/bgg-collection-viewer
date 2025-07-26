@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const Nav = () => {
   return (
@@ -16,10 +16,7 @@ const Nav = () => {
           </Link>
         </li>
         <li>
-          <Link
-            to="/new-games"
-            className="flex p-4 hover:bg-slate-300 rounded-xl"
-          >
+          <Link to="/new-games" className="flex p-4 hover:bg-slate-300 rounded-xl">
             2025 Games
           </Link>
         </li>

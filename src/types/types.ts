@@ -57,7 +57,7 @@ export type BggGame = {
   };
   comment: {
     _text: string;
-  }
+  };
 };
 
 export type TGame = {
