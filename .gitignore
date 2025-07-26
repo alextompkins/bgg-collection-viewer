@@ -26,3 +26,6 @@ bundle-stats
 
 # Local Netlify folder
 .netlify
+
+# Local env
+.env.development
