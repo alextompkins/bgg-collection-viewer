@@ -1,7 +1,8 @@
 import { fixupPluginRules } from '@eslint/compat';
 import js from '@eslint/js';
 import { Linter } from 'eslint';
-import { defineConfig } from 'eslint/config';
+import { defineConfig, globalIgnores } from 'eslint/config';
+import eslintConfigPrettier from 'eslint-config-prettier/flat';
 import importPlugin from 'eslint-plugin-import';
 import reactPlugin from 'eslint-plugin-react';
 import eslintPluginReactHooks from 'eslint-plugin-react-hooks';
@@ -11,9 +12,14 @@ import ts from 'typescript-eslint';
 import LanguageOptions = Linter.LanguageOptions;
 
 export default defineConfig([
-  {
-    ignores: ['dist', 'node_modules', 'playwright-report', 'test-results', 'storybook-static'],
-  },
+  globalIgnores([
+    'dist',
+    'node_modules',
+    'playwright-report',
+    'test-results',
+    'storybook-static',
+    'bundle-stats',
+  ]),
   ...[
     js.configs.recommended as Linter.Config,
     ...(ts.configs.recommended as Linter.Config[]),

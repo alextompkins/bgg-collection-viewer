@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "analyze-bundle": "rollup-plugin-visualizer bundle-stats/report.json --filename bundle-stats/stats.html --template sunburst --open",
     "dev": "concurrently \"vite dev\" \"npm run types:watch\" -n vite,tsc -c green,cyan -k",
     "build": "tsc && vite build",
     "check:all": "npm run types:check && npm run lint && npm run prettier",
@@ -43,6 +44,7 @@
     "globals": "^16.3.0",
     "postcss": "^8.4.33",
     "prettier": "^3.6.2",
+    "rollup-plugin-visualizer": "^6.0.3",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.38.0",
