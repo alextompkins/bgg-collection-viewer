@@ -1,0 +1,22 @@
+dist
+node_modules
+playwright-report
+**/screenshots
+test-results
+storybook-static
+bundle-stats
+
+LICENSE
+
+*.jpg
+*.local
+*.log
+*.log*
+# *.md
+*.png
+# *.sh
+*.svg
+*.tgz
+*.ttf
+*.woff
+*.woff2
