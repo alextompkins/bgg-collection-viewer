@@ -3,7 +3,6 @@ import './index.css';
 import { render } from 'preact';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { NewGames } from './components/NewGames/NewGames.tsx';
 import { Games } from './pages/Games/Games.tsx';
 import { Home } from './pages/Home/Home.tsx';
 import { ErrorPage } from './routes/error-page';
@@ -22,10 +21,6 @@ const router = createBrowserRouter([
       {
         path: '/games',
         element: <Games />,
-      },
-      {
-        path: '/new-games',
-        element: <NewGames />,
       },
     ],
   },

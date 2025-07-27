@@ -14,11 +14,6 @@ export const Nav = () => (
           Games
         </Link>
       </li>
-      <li>
-        <Link to="/new-games" className="flex p-4 hover:bg-slate-300 rounded-xl">
-          2025 Games
-        </Link>
-      </li>
     </ul>
   </div>
 );
