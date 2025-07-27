@@ -20,10 +20,11 @@ export interface CollectionStore {
   };
   loadCollection(): void;
   resetFilters(): void;
+  selectRandomGame(): void;
 }
 
 const DEFAULT_FILTERS: UnwrapSignals<CollectionStore['filters']> = {
-  playtimeCannotExceed: 300, // 5 hours
+  playtimeCannotExceed: 180, // 3 hours
   numberOfPlayers: 4,
   searchText: '',
 };
@@ -55,6 +56,15 @@ export const collectionStore = (): CollectionStore => {
     filters.playtimeCannotExceed.value = DEFAULT_FILTERS.playtimeCannotExceed;
     filters.numberOfPlayers.value = DEFAULT_FILTERS.numberOfPlayers;
     filters.searchText.value = DEFAULT_FILTERS.searchText;
+  }
+
+  function selectRandomGame() {
+    if (!allGames.value) return;
+
+    const collectionLength = allGames.value.length;
+    const randomIndex = Math.floor(Math.random() * (collectionLength - 1) + 1);
+    const randomGame = allGames.value[randomIndex];
+    filters.searchText.value = randomGame.name;
   }
 
   const gameWithSmallestPlaytime = computed(
@@ -104,6 +114,7 @@ export const collectionStore = (): CollectionStore => {
     filters,
     loadCollection,
     resetFilters,
+    selectRandomGame,
   };
 };
 

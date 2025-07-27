@@ -9,6 +9,7 @@ export const Filters = () => {
     gameWithSmallestPlaytime,
     filters: { numberOfPlayers, playtimeCannotExceed, searchText },
     resetFilters,
+    selectRandomGame,
   } = useCollectionStore();
 
   const onSearchTextChange = (e: JSX.TargetedInputEvent<HTMLInputElement>) => {
@@ -54,7 +55,7 @@ export const Filters = () => {
       <button
         className={`bg-slate-200 hover:bg-slate-300 p-2 rounded-lg`}
         type="button"
-        onClick={() => {}}
+        onClick={selectRandomGame}
       >
         Random Game
       </button>
