@@ -19,6 +19,7 @@
     "types:watch": "tsc --watch --preserveWatchOutput"
   },
   "dependencies": {
+    "@preact/signals": "^2.2.1",
     "fast-xml-parser": "^5.2.5",
     "preact": "^10.26.9",
     "react-router-dom": "^6.30.1"

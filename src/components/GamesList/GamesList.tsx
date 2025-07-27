@@ -1,23 +1,27 @@
-import { useBggGamesContext } from '../../context/BggGamesContext';
-import type { TGame } from '../../types/types';
-import { Game } from '../Game/Game';
+import { useEffect } from 'preact/hooks';
+
+import type { Game } from '../../models/game.ts';
+import { useCollectionStore } from '../../stores/collectionStore.ts';
+import { GameTile } from '../Game/GameTile.tsx';
 
 export const GamesList = () => {
-  const { collection, loading, error } = useBggGamesContext();
+  const { filteredGames, loading, error, loadCollection } = useCollectionStore();
 
-  if (loading) {
+  useEffect(() => loadCollection(), []);
+
+  if (loading.value) {
     return <p>Loading...</p>;
   }
 
-  if (error) {
+  if (error.value) {
     return <p>{error}</p>;
   }
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-      {collection?.map((game: TGame) => (
+      {filteredGames.value?.map((game: Game) => (
         <div key={game.bggId} className="col-span-1">
-          <Game {...game} key={game.bggId} />
+          <GameTile {...game} key={game.bggId} />
         </div>
       ))}
     </div>

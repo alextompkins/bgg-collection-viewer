@@ -1,21 +1,21 @@
-import type { TGame } from '../../types/types';
+import type { Game } from '../../models/game.ts';
 
-export const Game = ({
+export const GameTile = ({
   bggId,
-  image,
+  imageUrl,
   name,
-  yearpublished,
-  minplayers,
-  maxplayers,
-  playingtime,
-  numplays,
+  yearPublished,
+  minPlayers,
+  maxPlayers,
+  playingTime,
+  numPlays,
   comment,
-}: TGame) => {
+}: Game) => {
   return (
     <div className="flex flex-col shadow border-gray-700 bg-white my-4">
       <div className="w-full h-64 min-h-64 max-h-64">
         <img
-          src={image}
+          src={imageUrl}
           alt={name}
           className="object-cover object-top h-full w-full"
           loading="lazy"
@@ -24,13 +24,13 @@ export const Game = ({
 
       <div className="flex flex-col h-full p-4 leading-normal">
         <h2 className="mb-2 text-2xl font-bold tracking-tight">
-          {name} ({yearpublished})
+          {name} ({yearPublished})
         </h2>
         <p>
-          Players: {minplayers} - {maxplayers}
+          Players: {minPlayers} - {maxPlayers}
         </p>
-        <p>Avg. Playtime: {playingtime} minutes</p>
-        <p>Number of Plays: {numplays}</p>
+        <p>Avg. Playtime: {playingTime} minutes</p>
+        <p>Number of Plays: {numPlays}</p>
         <p>{comment}</p>
       </div>
       <div className="p-4 w-full flex">

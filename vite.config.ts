@@ -1,4 +1,3 @@
-import netlify from '@netlify/vite-plugin';
 import preact from '@preact/preset-vite';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
@@ -13,6 +12,5 @@ export default defineConfig(({ command }) => ({
         filename: `bundle-stats/report.json`,
         gzipSize: true,
       }),
-    netlify(),
   ],
 }));
