@@ -3,7 +3,7 @@ import { mapApiCollection } from './mappers/mapApiCollection.ts';
 
 const ENDPOINTS = {
   collection: (id: string) =>
-    `${import.meta.env.VITE_API_URL}/collection/${id}?own=1&excludesubtype=boardgameexpansion`,
+    `${import.meta.env.VITE_API_URL}/xmlapi2/collection?username=${id}&own=1&excludesubtype=boardgameexpansion`,
 };
 
 export async function getCollection(collectionId: string) {
