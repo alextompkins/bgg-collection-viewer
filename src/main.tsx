@@ -1,29 +1,7 @@
 import './index.css';
 
 import { render } from 'preact';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { Games } from './pages/Games/Games.tsx';
-import { Home } from './pages/Home/Home.tsx';
-import { ErrorPage } from './routes/error-page';
-import { Root } from './routes/root';
+import { ViewCollection } from './pages/ViewCollection/ViewCollection.tsx';
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Root />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: '/',
-        element: <Home />,
-      },
-      {
-        path: '/games',
-        element: <Games />,
-      },
-    ],
-  },
-]);
-
-render(<RouterProvider router={router} />, document.getElementById('root')!);
+render(<ViewCollection />, document.getElementById('root')!);
