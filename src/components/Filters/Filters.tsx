@@ -33,43 +33,53 @@ export const Filters = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row gap-4 align-middle w-full rounded-lg bg-slate-200 p-2 drop-shadow-md">
-      <span className="p-2 leading-[2]">Filters:</span>
-      <label className="p-2 flex align-middle">
-        <span className="ml-4 leading-[2]">Search</span>
-        <input className="ml-4" type="text" value={searchText} onInput={onSearchTextChange} />
-      </label>
-      <label className="p-2 flex align-middle">
-        <span className="leading-[2]">Avg. Play Time: </span>
+    <>
+      <div className="flex flex-col md:flex-row gap-4 align-middle bg-slate-200 p-2 drop-shadow-md">
         <input
           className="ml-4"
-          type="range"
-          step={10}
-          min={gameWithSmallestPlaytime.value?.maxPlaytime}
-          max={gameWithLargestPlaytime.value?.maxPlaytime}
-          value={playtimeCannotExceed}
-          onInput={handlePlayTimeRangeChange}
+          type="text"
+          value={searchText}
+          placeholder="Search..."
+          onInput={onSearchTextChange}
         />
-        <span className="ml-4 leading-[2]">{playtimeCannotExceed.value} mins or less</span>
-      </label>
-      <button
-        className={`bg-slate-200 hover:bg-slate-300 p-2 rounded-lg`}
-        type="button"
-        onClick={selectRandomGame}
-      >
-        Random Game
-      </button>
-      <label className="bg-slate-200 hover:bg-slate-300 p-2 rounded-lg">
-        <span className="leading-[2]"># players</span>
-        <input value={numberOfPlayers.value} type="number" onInput={handleNumberOfPlayersChange} />
-      </label>
-      <button
-        className="bg-slate-200 hover:bg-slate-300 p-2 rounded-lg"
-        type="button"
-        onClick={resetFilters}
-      >
-        Reset
-      </button>
-    </div>
+        <label className="p-2 flex flex-col align-middle">
+          <span className="ml-4">Avg. Play Time: </span>
+          <input
+            className="ml-4"
+            type="range"
+            step={10}
+            min={gameWithSmallestPlaytime.value?.maxPlaytime}
+            max={gameWithLargestPlaytime.value?.maxPlaytime}
+            value={playtimeCannotExceed}
+            onInput={handlePlayTimeRangeChange}
+          />
+          <span className="ml-4 leading-[2]">{playtimeCannotExceed.value} mins or less</span>
+        </label>
+        <label className="bg-slate-200 hover:bg-slate-300 p-2 rounded-lg">
+          <span className="leading-[2]"># players</span>
+          <input
+            value={numberOfPlayers.value}
+            type="number"
+            onInput={handleNumberOfPlayersChange}
+          />
+        </label>
+      </div>
+      <div className="flex flex-col md:flex-row gap-4 align-middle bg-slate-200 p-2 drop-shadow-md">
+        <button
+          className={`bg-slate-200 hover:bg-slate-300 p-2 rounded-lg`}
+          type="button"
+          onClick={selectRandomGame}
+        >
+          Random Game
+        </button>
+        <button
+          className="bg-slate-200 hover:bg-slate-300 p-2 rounded-lg"
+          type="button"
+          onClick={resetFilters}
+        >
+          Reset
+        </button>
+      </div>
+    </>
   );
 };

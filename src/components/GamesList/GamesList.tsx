@@ -7,7 +7,7 @@ import { GameTile } from '../Game/GameTile.tsx';
 export const GamesList = () => {
   const { filteredGames, loading, error, loadCollection } = useCollectionStore();
 
-  useEffect(() => loadCollection(), []);
+  useEffect(() => loadCollection(), [loadCollection]);
 
   if (loading.value) {
     return <p>Loading...</p>;
