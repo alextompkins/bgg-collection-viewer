@@ -4,6 +4,7 @@ import { createContext } from 'preact';
 import { getCollection } from '../api/bggApi.ts';
 import { useStore } from '../context/StoreProvider.tsx';
 import type { Game } from '../models/game.ts';
+import { getCollectionIdFromPath } from '../utils/getIdFromPath.ts';
 import type { UnwrapSignals } from '../utils/unwrapSignals.ts';
 
 export interface CollectionStore {
@@ -40,7 +41,7 @@ export const collectionStore = (): CollectionStore => {
   async function loadCollection() {
     loading.value = true;
     try {
-      const collection = await getCollection(import.meta.env.VITE_GUILD_ID);
+      const collection = await getCollection(getCollectionIdFromPath());
       allGames.value = collection.games;
     } catch (e) {
       console.error('Error fetching games:', e);
