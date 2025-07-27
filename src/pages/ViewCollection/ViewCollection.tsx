@@ -5,7 +5,7 @@ import { StoreProvider } from '../../context/StoreProvider.tsx';
 import { collectionStore, CollectionStoreContext } from '../../stores/collectionStore.ts';
 
 export const ViewCollection = () => (
-  <DocumentResizeObserver>
+  <DocumentResizeObserver frameId="collection-viewer">
     <StoreProvider context={CollectionStoreContext} storeFn={collectionStore}>
       <Filters />
       <GamesList />
