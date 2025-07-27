@@ -12,7 +12,7 @@ export const mapApiGame = (apiGame: ApiGame): Game => ({
   maxPlayers: parseIntStrict(apiGame.stats['@_maxplayers'], () => undefined),
   minPlaytime: parseIntStrict(apiGame.stats['@_minplaytime'], () => undefined),
   maxPlaytime: parseIntStrict(apiGame.stats['@_maxplaytime'], () => undefined),
-  playingTime: parseIntStrict(apiGame.stats['@_playingtime'], () => undefined),
+  avgPlaytime: parseIntStrict(apiGame.stats['@_playingtime'], () => undefined),
   numPlays: apiGame.numplays,
   comment: apiGame.comment,
 });

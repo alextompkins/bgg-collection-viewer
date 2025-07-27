@@ -71,7 +71,7 @@ export const collectionStore = (): CollectionStore => {
     () =>
       allGames.value?.reduce(
         (min, current) =>
-          current.playingTime && current.playingTime < (min.playingTime ?? Infinity)
+          current.avgPlaytime && current.avgPlaytime < (min.avgPlaytime ?? Infinity)
             ? current
             : min,
         allGames.value[0],
@@ -82,7 +82,7 @@ export const collectionStore = (): CollectionStore => {
     () =>
       allGames.value?.reduce(
         (max, current) =>
-          current.playingTime && current.playingTime > (max.playingTime ?? 0) ? current : max,
+          current.avgPlaytime && current.avgPlaytime > (max.avgPlaytime ?? 0) ? current : max,
         allGames.value[0],
       ) ?? undefined,
   );

@@ -8,7 +8,7 @@ export interface Game {
   maxPlayers?: number;
   minPlaytime?: number;
   maxPlaytime?: number;
-  playingTime?: number;
+  avgPlaytime?: number;
   numPlays: number;
   comment?: string;
 }

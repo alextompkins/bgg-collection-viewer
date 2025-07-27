@@ -7,8 +7,8 @@ export const GameTile = ({
   yearPublished,
   minPlayers,
   maxPlayers,
-  playingTime,
-  numPlays,
+  minPlaytime,
+  maxPlaytime,
   comment,
 }: Game) => {
   return (
@@ -27,10 +27,9 @@ export const GameTile = ({
           {name} ({yearPublished})
         </h2>
         <p>
-          Players: {minPlayers} - {maxPlayers}
+          {minPlayers} - {maxPlayers} players
         </p>
-        <p>Avg. Playtime: {playingTime} minutes</p>
-        <p>Number of Plays: {numPlays}</p>
+        <p>{minPlaytime === maxPlaytime ? minPlaytime : `${minPlaytime}-${maxPlaytime}`} mins</p>
         <p>{comment}</p>
       </div>
       <div className="p-4 w-full flex">
