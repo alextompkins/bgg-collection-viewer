@@ -1,3 +1,6 @@
+import { Anchor, Badge, Button, Card, Group, Image, Pill, Stack, Text } from '@mantine/core';
+import { parseEntities } from 'parse-entities';
+
 import type { Game } from '../../models/game.ts';
 
 export const GameTile = ({
@@ -9,39 +12,56 @@ export const GameTile = ({
   maxPlayers,
   minPlaytime,
   maxPlaytime,
-  comment,
+  mechanics,
+  description,
 }: Game) => {
   return (
-    <div className="flex flex-col shadow border-gray-700 bg-white my-4">
-      <div className="w-full h-64 min-h-64 max-h-64">
-        <img
-          src={imageUrl}
-          alt={name}
-          className="object-cover object-top h-full w-full"
-          loading="lazy"
-        />
-      </div>
+    <Card shadow="sm" padding="md" radius="md" withBorder>
+      <Card.Section mb="md">
+        <Image src={imageUrl} alt={name} loading="lazy" />
+      </Card.Section>
 
-      <div className="flex flex-col h-full p-4 leading-normal">
-        <h2 className="mb-2 text-2xl font-bold tracking-tight">
-          {name} ({yearPublished})
-        </h2>
-        <p>
-          {minPlayers} - {maxPlayers} players
-        </p>
-        <p>{minPlaytime === maxPlaytime ? minPlaytime : `${minPlaytime}-${maxPlaytime}`} mins</p>
-        <p>{comment}</p>
-      </div>
-      <div className="p-4 w-full flex">
-        <a
-          className="text-center w-full mt-4 p-4 border-2 border-slate-300 hover:bg-slate-200"
+      <Stack spacing="md">
+        <Group justify="space-between">
+          <Text fw={600} size="lg">
+            {name}
+          </Text>
+          <Badge color="gray">{yearPublished}</Badge>
+        </Group>
+
+        {description ? (
+          <Text size="sm" c="dimmed">
+            {parseEntities(description).slice(0, 200)}...
+          </Text>
+        ) : undefined}
+
+        <Stack spacing="xs">
+          <Text size="sm">
+            👥 {minPlayers}-{maxPlayers} players
+          </Text>
+          <Text size="sm">
+            ⏳ {minPlaytime === maxPlaytime ? minPlaytime : `${minPlaytime}-${maxPlaytime}`} mins
+          </Text>
+        </Stack>
+
+        {mechanics ? (
+          <Group>
+            {mechanics.map(({ name, id }) => (
+              <Pill key={id}>{name}</Pill>
+            ))}
+          </Group>
+        ) : undefined}
+
+        <Anchor
           href={`https://boardgamegeek.com/boardgame/${bggId}`}
           target="_blank"
           rel="noreferrer"
         >
-          View on BGG
-        </a>
-      </div>
-    </div>
+          <Button color="red" fullWidth mt="md" radius="md">
+            View on BGG
+          </Button>
+        </Anchor>
+      </Stack>
+    </Card>
   );
 };

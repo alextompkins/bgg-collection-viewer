@@ -1,3 +1,4 @@
+import { Grid } from '@mantine/core';
 import { useEffect } from 'preact/hooks';
 
 import type { Game } from '../../models/game.ts';
@@ -18,12 +19,19 @@ export const GamesList = () => {
   }
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+    <Grid columns={12}>
       {filteredGames.value?.map((game: Game) => (
-        <div key={game.bggId} className="col-span-1">
+        <Grid.Col
+          key={game.bggId}
+          span={{
+            base: 6,
+            md: 4,
+            lg: 2,
+          }}
+        >
           <GameTile {...game} key={game.bggId} />
-        </div>
+        </Grid.Col>
       ))}
-    </div>
+    </Grid>
   );
 };

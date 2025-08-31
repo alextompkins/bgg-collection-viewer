@@ -34,18 +34,16 @@ export const Filters = () => {
 
   return (
     <>
-      <div className="flex flex-col md:flex-row gap-4 align-middle bg-slate-200 p-2 drop-shadow-md">
+      <div>
         <input
-          className="ml-4"
           type="text"
           value={searchText}
           placeholder="Search..."
           onInput={onSearchTextChange}
         />
-        <label className="p-2 flex flex-col align-middle">
-          <span className="ml-4">Avg. Play Time: </span>
+        <label>
+          <span>Avg. Play Time: </span>
           <input
-            className="ml-4"
             type="range"
             step={10}
             min={gameWithSmallestPlaytime.value?.maxPlaytime}
@@ -53,10 +51,10 @@ export const Filters = () => {
             value={playtimeCannotExceed}
             onInput={handlePlayTimeRangeChange}
           />
-          <span className="ml-4 leading-[2]">{playtimeCannotExceed.value} mins or less</span>
+          <span>{playtimeCannotExceed.value} mins or less</span>
         </label>
-        <label className="bg-slate-200 hover:bg-slate-300 p-2 rounded-lg">
-          <span className="leading-[2]"># players</span>
+        <label>
+          <span># players</span>
           <input
             value={numberOfPlayers.value}
             type="number"
@@ -64,19 +62,11 @@ export const Filters = () => {
           />
         </label>
       </div>
-      <div className="flex flex-col md:flex-row gap-4 align-middle bg-slate-200 p-2 drop-shadow-md">
-        <button
-          className={`bg-slate-200 hover:bg-slate-300 p-2 rounded-lg`}
-          type="button"
-          onClick={selectRandomGame}
-        >
+      <div>
+        <button type="button" onClick={selectRandomGame}>
           Random Game
         </button>
-        <button
-          className="bg-slate-200 hover:bg-slate-300 p-2 rounded-lg"
-          type="button"
-          onClick={resetFilters}
-        >
+        <button type="button" onClick={resetFilters}>
           Reset
         </button>
       </div>
