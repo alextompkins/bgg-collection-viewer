@@ -28,4 +28,4 @@ bundle-stats
 .netlify
 
 # Local env
-.env.development
+.env
