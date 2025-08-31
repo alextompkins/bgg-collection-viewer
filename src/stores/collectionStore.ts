@@ -1,7 +1,7 @@
 import { computed, type ReadonlySignal, type Signal, signal } from '@preact/signals';
 import { createContext } from 'preact';
 
-import { getCollection } from '../api/bggApi.ts';
+import { getCollection } from '../api/functionsApi.ts';
 import { useStore } from '../context/StoreProvider.tsx';
 import type { Game } from '../models/game.ts';
 import { getCollectionIdFromPath } from '../utils/getIdFromPath.ts';
