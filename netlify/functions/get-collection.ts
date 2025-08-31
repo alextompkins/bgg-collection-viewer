@@ -5,6 +5,7 @@ import { getStore } from '@netlify/blobs';
 import type { Config, Context } from '@netlify/functions';
 
 import { getCollection } from '../../src/api/bggApi';
+import type { Collection } from '../../src/models/collection';
 
 export const config: Config = {
   method: 'GET',
@@ -17,14 +18,17 @@ async function getCollectionFn(_request: Request, context: Context): Promise<Res
 
   const collectionStore = getStore('collections');
   const cachedCollection = await collectionStore.get(collectionId);
-  console.log('cachedCollection', JSON.parse(cachedCollection));
 
-  const collection = cachedCollection
-    ? JSON.parse(cachedCollection)
-    : await getCollection(collectionId);
+  let collection: Collection;
 
-  if (!cachedCollection) {
-    collectionStore.setJSON(collectionId, collection).catch(console.error); // don't need to wait for this
+  if (cachedCollection) {
+    collection = JSON.parse(cachedCollection);
+  } else {
+    collection = await getCollection(collectionId);
+
+    // Put it in the cache for future requests
+    // We don't need to wait for this
+    collectionStore.setJSON(collectionId, collection).catch(console.error);
   }
 
   return new Response(JSON.stringify(collection), {
