@@ -11,12 +11,11 @@ export const config: Config = {
   path: '/api/collection/:collectionId',
 };
 
-const collectionStore = getStore('collections');
-
 async function getCollectionFn(_request: Request, context: Context): Promise<Response> {
   const { collectionId } = context.params;
   if (!collectionId) return new Response('collectionId param missing', { status: 400 });
 
+  const collectionStore = getStore('collections');
   const cachedCollection = await collectionStore.get(collectionId);
   console.log('cachedCollection', JSON.parse(cachedCollection));
 

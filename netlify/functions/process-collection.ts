@@ -1,23 +1,25 @@
 // noinspection JSUnusedGlobalSymbols
 /* eslint-disable import/no-default-export */
 
+import { getStore } from '@netlify/blobs';
 import type { Config, Context } from '@netlify/functions';
 
-interface ScheduledFnRequestBody {
-  next_run: string;
-}
+import type { Collection } from '../../src/models/collection';
 
 export const config: Config = {
-  schedule: '*/15 * * * *', // every 15 minutes
+  schedule: '*/5 * * * *', // every 5 minutes
 };
 
-async function processCollectionFn(request: Request, context: Context) {
-  const { next_run } = (await request.json()) as ScheduledFnRequestBody;
+async function processCollectionFn(_request: Request, _context: Context) {
+  console.log(`scheduled function at ${new Date().toISOString()}`);
 
-  console.log(
-    `scheduled function at ${new Date().toISOString()} (account id :${context.account.id})`,
-  );
-  console.log(`Next invocation at ${next_run}`);
+  const collectionStore = getStore('collections');
+  const collectionIds = (await collectionStore.list()).blobs.map((blob) => blob.key);
+  const collection = JSON.parse(await collectionStore.get(collectionIds[0])) as Collection;
+
+  console.log(collection.games.length);
+
+  // await Promise.all(collection.games.map((game) => getThing(game.bggId)));
 }
 
 export default processCollectionFn;
