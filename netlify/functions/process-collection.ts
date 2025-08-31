@@ -10,17 +10,18 @@ import type { GameAugmentation } from '../../src/models/game';
 import { delay } from '../../src/utils/delay';
 
 export const config: Config = {
-  schedule: '*/10 * * * *', // every 5 minutes
+  schedule: '*/30 * * * *', // every 30 minutes
 };
 
 const GAMES_PER_SHARD = 20;
-const REQUEST_INTERVAL = 500;
+const REQUEST_INTERVAL = 20;
 
 async function processCollectionFn(_request: Request, _context: Context) {
   const collectionStore = getStore('collections');
   const collectionIds = (await collectionStore.list()).blobs.map((blob) => blob.key);
   // Just do the one collection for now
-  const collection = JSON.parse(await collectionStore.get(collectionIds[0])) as Collection;
+  const collectionId = process.env.VITE_DEFAULT_COLLECTION ?? collectionIds[0];
+  const collection = JSON.parse(await collectionStore.get(collectionId)) as Collection;
 
   const gameIds = collection.games.map((game) => game.bggId);
   const gameDetails: GameAugmentation[] = [];
@@ -33,10 +34,10 @@ async function processCollectionFn(_request: Request, _context: Context) {
     );
     await delay(REQUEST_INTERVAL);
     try {
-      console.log(`Fetching shard ${shardIndex}/${shardTotal} (${idsToFetch.length} games)`);
+      console.log(`Fetching shard ${shardIndex + 1}/${shardTotal} (${idsToFetch.length} games)`);
       gameDetails.push(...(await getGameDetails(idsToFetch)));
     } catch {
-      console.warn(`Shard ${shardIndex}/${shardTotal} failed`);
+      console.warn(`Shard ${shardIndex + 1}/${shardTotal} failed`);
     }
   }
 
@@ -54,7 +55,7 @@ async function processCollectionFn(_request: Request, _context: Context) {
   };
 
   // Put the augmented collection into the store
-  await collectionStore.setJSON('collections', updatedCollection);
+  await collectionStore.setJSON(collectionId, updatedCollection);
 }
 
 export default processCollectionFn;
