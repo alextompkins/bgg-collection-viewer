@@ -1,3 +1,5 @@
+import { parseEntities } from 'parse-entities';
+
 import type { GameAugmentation } from '../../models/game.ts';
 import type { ApiThing, ApiThings } from '../apiModels/apiThing.ts';
 
@@ -25,7 +27,7 @@ const mapType = (
 const mapApiThing = (apiThing: ApiThing): GameAugmentation => {
   const augmentation: GameAugmentation = {
     bggId: apiThing['@_id'],
-    description: apiThing.description,
+    description: apiThing.description ? parseEntities(apiThing.description) : undefined,
   };
 
   for (const link of apiThing.link) {

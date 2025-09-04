@@ -1,5 +1,4 @@
 import { Anchor, Badge, Button, Card, Group, Image, Pill, Stack, Text } from '@mantine/core';
-import { parseEntities } from 'parse-entities';
 
 import type { Game } from '../../models/game.ts';
 
@@ -31,7 +30,7 @@ export const GameTile = ({
 
         {description ? (
           <Text size="sm" c="dimmed">
-            {parseEntities(description).slice(0, 200)}...
+            {description.slice(0, 200)}...
           </Text>
         ) : undefined}
 

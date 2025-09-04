@@ -13,7 +13,7 @@ interface ApiLink {
 
 export interface ApiThing {
   '@_id': string;
-  description: string;
+  description?: string;
   link: ApiLink[];
 }
 
