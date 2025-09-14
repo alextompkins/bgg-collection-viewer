@@ -8,7 +8,7 @@ import { getCollectionIdFromPath } from '../utils/getIdFromPath.ts';
 import type { UnwrapSignals } from '../utils/unwrapSignals.ts';
 
 export interface CollectionStore {
-  filteredGames: ReadonlySignal<Game[] | undefined>;
+  shownGames: ReadonlySignal<Game[]>;
   gameWithSmallestPlaytime: ReadonlySignal<Game | undefined>;
   gameWithLargestPlaytime: ReadonlySignal<Game | undefined>;
   loading: ReadonlySignal<boolean>;
@@ -18,7 +18,7 @@ export interface CollectionStore {
     numberOfPlayers: Signal<number>;
     searchText: Signal<string>;
   };
-  loadCollection(): void;
+  showMore(): void;
   resetFilters(): void;
   selectRandomGame(): void;
 }
@@ -38,8 +38,9 @@ export const collectionStore = (): CollectionStore => {
     numberOfPlayers: signal(DEFAULT_FILTERS.numberOfPlayers),
     searchText: signal(DEFAULT_FILTERS.searchText),
   };
+  const numGamesToShow = signal(0);
 
-  async function loadCollection() {
+  async function fetchCollection() {
     loading.value = true;
     try {
       const collection = await getCollection(getCollectionIdFromPath());
@@ -50,6 +51,16 @@ export const collectionStore = (): CollectionStore => {
     } finally {
       loading.value = false;
     }
+  }
+
+  function showMore() {
+    if (allGames.value === undefined) {
+      console.log('fetching games for the first time');
+      fetchCollection().catch(console.error);
+    }
+
+    numGamesToShow.value += 20;
+    console.log('showing 20 more games', numGamesToShow.value);
   }
 
   function resetFilters() {
@@ -88,7 +99,7 @@ export const collectionStore = (): CollectionStore => {
   );
 
   const filteredGames = computed(() => {
-    if (!allGames.value) return undefined;
+    if (!allGames.value) return [];
 
     return allGames.value
       .filter((game) => game.maxPlaytime && game.maxPlaytime <= filters.playtimeCannotExceed.value)
@@ -105,14 +116,16 @@ export const collectionStore = (): CollectionStore => {
       );
   });
 
+  const shownGames = computed(() => filteredGames.value.slice(0, numGamesToShow.value));
+
   return {
-    filteredGames,
+    shownGames,
     gameWithSmallestPlaytime,
     gameWithLargestPlaytime,
     loading,
     error,
     filters,
-    loadCollection,
+    showMore,
     resetFilters,
     selectRandomGame,
   };
