@@ -20,7 +20,7 @@ export const GameTile = ({
         <Image src={imageUrl} alt={name} loading="lazy" />
       </Card.Section>
 
-      <Stack spacing="md">
+      <Stack gap="md">
         <Group justify="space-between">
           <Text fw={600} size="lg">
             {name}
@@ -34,7 +34,7 @@ export const GameTile = ({
           </Text>
         ) : undefined}
 
-        <Stack spacing="xs">
+        <Stack gap="xs">
           <Text size="sm">
             👥 {minPlayers}-{maxPlayers} players
           </Text>
