@@ -34,6 +34,7 @@ async function getCollectionFn(_request: Request, context: Context): Promise<Res
   return new Response(JSON.stringify(collection), {
     status: 200,
     headers: {
+      'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
     },
   });
