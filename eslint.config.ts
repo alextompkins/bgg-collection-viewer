@@ -52,7 +52,8 @@ export default defineConfig([
       'react/react-in-jsx-scope': 'off',
       '@typescript-eslint/consistent-type-imports': 'error',
       'import/no-default-export': 'error',
-      'import/no-unresolved': 'error',
+      // Ignore virtual modules when resolving
+      'import/no-unresolved': ['error', { ignore: ['virtual:.*'] }],
 
       // Import sorting
       'import/order': 'off', // must be off for simple-import-sort to work

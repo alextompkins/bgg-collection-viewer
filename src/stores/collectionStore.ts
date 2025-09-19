@@ -4,7 +4,6 @@ import { createContext } from 'preact';
 import { getCollection } from '../api/functionsApi.ts';
 import { useStore } from '../context/StoreProvider.tsx';
 import type { Game } from '../models/game.ts';
-import { getCollectionIdFromPath } from '../utils/getIdFromPath.ts';
 import type { UnwrapSignals } from '../utils/unwrapSignals.ts';
 
 export interface CollectionStore {
@@ -29,7 +28,7 @@ const DEFAULT_FILTERS: UnwrapSignals<CollectionStore['filters']> = {
   searchText: '',
 };
 
-export const collectionStore = (): CollectionStore => {
+export const collectionStore = (collectionId: string): CollectionStore => {
   const allGames = signal<Game[]>();
   const loading = signal(false);
   const error = signal<string>();
@@ -43,7 +42,7 @@ export const collectionStore = (): CollectionStore => {
   async function fetchCollection() {
     loading.value = true;
     try {
-      const collection = await getCollection(getCollectionIdFromPath());
+      const collection = await getCollection(collectionId);
       allGames.value = collection.games;
     } catch (e) {
       console.error('Error fetching games:', e);

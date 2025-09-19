@@ -8,9 +8,3 @@
 
 [functions]
   node_bundler = "esbuild"
-
-# SPA redirect
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200

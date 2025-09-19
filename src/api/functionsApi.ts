@@ -1,5 +1,5 @@
 const ENDPOINTS = {
-  collection: (id: string) => `/api/collection/${id}`,
+  collection: (id: string) => `${process.env.DEPLOY_PRIME_URL}/api/collection/${id}`,
 };
 
 export async function getCollection(collectionId: string) {

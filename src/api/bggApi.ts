@@ -4,8 +4,8 @@ import { mapApiThings } from './mappers/mapApiThings.ts';
 
 const ENDPOINTS = {
   collection: (id: string) =>
-    `${process.env.VITE_API_URL}/xmlapi2/collection?username=${id}&own=1&stats=1&excludesubtype=boardgameexpansion`,
-  thing: (ids: string[]) => `${process.env.VITE_API_URL}/xmlapi2/thing?id=${ids.join(',')}`,
+    `${process.env.BGG_API_URL}/xmlapi2/collection?username=${id}&own=1&stats=1&excludesubtype=boardgameexpansion`,
+  thing: (ids: string[]) => `${process.env.BGG_API_URL}/xmlapi2/thing?id=${ids.join(',')}`,
 };
 
 export async function getCollection(collectionId: string) {
