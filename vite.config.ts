@@ -5,10 +5,6 @@ import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
 import { shadowStylesPlugin } from 'vite-plugin-shadow-styles';
 
-import pkg from './package.json' with { type: 'json' };
-
-const externalDependencies = Object.keys(pkg.dependencies);
-
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => ({
   build: {
@@ -20,7 +16,7 @@ export default defineConfig(({ command, mode }) => ({
     },
     minify: mode === 'production',
     rollupOptions: {
-      external: externalDependencies,
+      external: [], // TODO externalize dependencies... somehow
     },
   },
   define: {
